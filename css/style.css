@@ -1,0 +1,741 @@
+/* ----- RESET CSS: serve per rimuovere gli sili di default che sono diversi
+per ogni browser https://en.wikipedia.org/wiki/Reset_style_sheet ---------- */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p,
+blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn,
+em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup,
+tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table,
+caption, tbody, tfoot, thead,tr, th, td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-weight: inherit;
+    font-style: inherit;
+    font-size: 100%;
+    font-family: inherit;
+    vertical-align: baseline;
+}
+:focus {
+    outline: 0;
+}
+body {
+    line-height: 1;
+    color: black;
+    background: white;
+}
+ol,
+ul {
+    list-style: none;
+}
+table {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+caption,
+th,
+td {
+    text-align: left;
+    font-weight: normal;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+    content: "";
+}
+blockquote,
+q {
+    quotes: "" "";
+}
+/* ------- ACCESSIBILITA' ------- */
+    :focus {
+    /* offset-x | offset-y | blur-radius | spread-radius | color */
+    box-shadow: 0 0 0 3px rgba(21, 156, 228, 0.4);
+}
+/* --------- FORMATTAZIONE TESTO --------- */
+@font-face {
+    font-family: "roxborough";
+    src: url("fonts/roxborough.eot");
+    src: url("fonts/roxborough.eot?#iefix") format("embedded-opentype"), url("fonts/roxborough.woff2") format("woff2"),
+        url("fonts/roxborough.woff") format("woff"), url("fonts/roxborough.ttf") format("truetype"),
+        url("fonts/roxborough.svg#") format("svg");
+    font-weight: 100;
+    font-style: normal;
+}
+body {
+    font-family: "Montserrat", Arial, Helvetica, sans-serif;
+}
+h1, h2, h3, .domanda legend, blockquote {
+    font-family: "roxborough", serif;
+}
+h1 span {
+    display: block;
+    font-family: "Montserrat", Arial, Helvetica, sans-serif;
+    font-size: 1rem;
+    padding-top: 0.5rem;
+}
+/* usiamo i rem invece che gli em in modo che le misure siano sempre relative al
+font-size del body e non a quello dell'elemento genitore */
+h1 {
+    font-size: 2rem;
+}
+h2 {
+    font-size: 1.5rem;
+    margin-top: 2rem;
+}
+h3 {
+    font-size: 1.3rem;
+}
+.text-right {
+    text-align: right;
+}
+.text-center {
+    text-align: center;
+}
+.text-bold {
+    font-weight: bold;
+}
+blockquote {
+    font-size: 2.3rem;
+    width: 60%;
+    margin: 3rem auto 0.5rem auto;
+    padding: 2rem;
+}
+.autore-citazione {
+    width: 60%;
+    margin: 0.5rem auto;
+    padding: 0 2rem;
+}
+/* ----------- COLORI ------------ */
+.primary-color {
+    color: #55536a;
+}
+.primary-background {
+    background-color:#55536a;
+}
+.secondary-color-light {
+    color: #cfece8;
+}
+.secondary-background-light {
+    background-color: #cfece8;
+}
+.secondary-color-dark {
+    color: #49b6a8;
+}
+.secondary-background-dark {
+    background-color: #49b6a8;
+}
+.dark-color {
+    color: #49495e;
+}
+.dark-background {
+    background-color: #49495e;
+}
+.light-color {
+    color:#f7f7f8;
+}
+.light-background {
+    background-color:#f7f7f8;
+}
+/* ----------- LINKS ------------ */
+a:link, a:visited {
+    color: #55536a;
+}
+a:hover, a:active, a:focus {
+    color: #49b6a8;
+}
+/* ------- FORMS ------------- */
+form {
+    padding: 2rem;
+}
+input[type="text"],
+input[type="email"],
+input[type="search"],
+input[type="password"],
+input[type="url"],
+input[type="date"],
+input[type="file"] {
+    width: 100%;
+    padding: 0.5rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+input[type="number"],
+input[type="date"],
+input[type="file"] {
+    width: 50%;
+}
+textarea {
+    width: 100%;
+    padding: 0.5rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+select {
+    padding: 0.5rem;
+    border-radius: 10px;
+    border: none;
+}
+.hint {
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    font-style: italic;
+}
+.prefix {
+    display: flex;
+    align-items: center;
+}
+/* -------------- BOTTONI ------------ */
+button {
+    background-color: transparent;
+    border: none;
+    padding: 0.5rem 1rem;
+    /* trasforma il cursore in manina */
+    cursor: pointer;
+    /* specifica che tutte le prprietà che cambiano stato devono avere una transizione */
+    transition: all linear 0.3s;
+}
+/* ----------- BREADCRUMBS --------- */
+.breadcrumbs {
+    display: flex;
+    padding: 1rem 0.5rem;
+    align-items: center;
+}
+.breadcrumbs li a {
+    padding: 0.2rem;
+    display: block;
+    text-decoration: none;
+}
+.breadcrumbs li a:after {
+    content: " /";
+}
+/* ------------ VIDEO ---------------- */
+video {
+    display: block;
+    width: 90%;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #cfece8;
+}
+/* ---------------- LAYOUT ------------- */
+body {
+    max-width: 1024px;
+    margin: auto;
+}
+hr {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    width: 70%;
+}
+.thank-you-message {
+    width: 50%;
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+/* ------ HEADER ------ */
+#topbar {
+    width: 100%;
+    /* specifica che gli elementi all'interno si dovranno affiancare */
+    display: flex;
+    /* specifica che gli elementi all'interno dovranno distribuirsi per tutta la larghezza*/
+    justify-content: space-between;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+#topbar > * {
+    /* specifica quanto dello spazio disponibile deve essere assegnato all'elemento*/
+    flex-grow: 1;
+    /* specifica quanto dello spazio in eccesso deve essere rimosso dall'elemento*/
+    flex-shrink: 1;
+    /* specifica la dimensine inizial degli elementi*/
+    flex-basis: 33.33%;
+}
+#cerca input {
+    /*  i 100px sono la larghezza del bottone + la label*/
+    width: calc(100% - 100px);
+}
+#cerca button:hover {
+    background-color: #cfece8;
+    transition: all linear 0.3s;
+}
+#cerca button:hover span {
+    color: #55536a;
+    transition: all linear 0.3s;
+}
+#logo a {
+    text-decoration: none;
+}
+#user-menu {
+    display: flex;
+    /* specifica che gli elementi all'interno devono distribuirsi alla fine */
+    justify-content: flex-end;
+    padding: 2rem;
+}
+#user-menu li a {
+    text-decoration: none;
+    padding: 1rem;
+    transition: all linear 0.3s;
+}
+#user-menu li:hover a,
+#user-menu li:hover span {
+    background-color: #55536a;
+    color: #cfece8;
+    transition: all linear 0.3s;
+}
+nav ul {
+    display: flex;
+    /* specifica che gli elementi all'interno dovranno distribuirsi al centro */
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+nav ul li a {
+    display: block;
+    text-decoration: none;
+    padding: 1rem 2rem;
+    transition: all linear 0.3s;
+}
+nav ul li:hover a {
+    background-color: #cfece8;
+    color: #55536a;
+    transition: all linear 0.3s;
+}
+nav ul li a.menu-active {
+    background-color: #49b6a8;
+    color: white;
+}
+nav ul li:last-child a {
+    color: white;
+    position: fixed;
+    right: 0;
+    top: 0;
+    max-width: 100px;
+    border-bottom-left-radius: 40px;
+    padding: 0.5rem 0.5rem 0.5rem 2rem;
+}
+nav ul li:last-child a:hover {
+    color: #55536a;
+    transition: all linear 0.3s;
+}
+/* ------- FOOTER ---------- */
+footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem;
+    border-top: 0.5px solid  #49495e;
+}
+footer .icons {
+    display: flex;
+}
+footer .icons a {
+    font-size: 1.7rem;
+    padding: 0.5rem;
+}
+/* ---------- HOME ---------------- */
+blockquote {
+    border-left: 5px solid #49b6a8;
+}
+#categorie, #artisti {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+#categorie li,
+#artisti li {
+    width: 256px;
+    height: 256px;
+}
+#categorie li {
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+#artisti li {
+    border-radius: 50%;
+    margin-right: 1rem;
+    margin-left: 1rem;
+}
+#categorie a,
+#artisti a {
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    color: white;
+    background-color: rgba(85,83,106,0.85);
+    transition: all linear 0.3s;
+}
+#artisti a {
+    border-radius: 50%;
+    text-transform: uppercase;
+}
+#categorie a:hover,
+#artisti a:hover {
+    background-color: #55536a;
+    transition: all linear 0.3s;
+}
+#categorie .impressionismo {
+    background-image: url("../img/medie/Claude_Monet_Regate_ad_Argenteuil-media.jpg");
+}
+#categorie .cubismo {
+    background-image: url("../img/medie/Pablo_Picasso_Guernica-media.jpg");
+}
+#categorie .puntinismo {
+    background-image: url("../img/medie/Georges_Seurat_I_bagnanti_ad_Asnieres-media.jpg");
+}
+#categorie .futurismo {
+    background-image: url("../img/medie/Joseph_Stella_Battle_of_Lights-media.jpg");
+}
+#categorie .iperrealismo {
+    background-image: url("../img/medie/Mauro_David_Fruttiera_di_cristallo_con_meloni.jpg");
+}
+#categorie .pop-art {
+    background-image: url("../img/medie/Andy_Warhol_Marilyn.jpg");
+}
+#categorie .surrealismo {
+    background-image: url("../img/medie/Max_Ernst_Il_bacio.jpg");
+}
+#categorie .naif {
+    background-image: url("../img/medie/Louis_Vivin_Jungle.jpg");
+}
+#artisti .monetti {
+    background-image: linear-gradient(to right, #5d26c1, #a17fe0, #59c173);
+}
+#artisti .goghi {
+    background-image: linear-gradient(to right, #f11712, #0099f7)
+}
+#artisti .picassi {
+    background-image: linear-gradient( to right,  #be0bd7, #f6ea0b);
+}
+/* ------- PAGINA CARRELLO --------- */
+/* https://www.w3.org/Style/Examples/007/color-bullets.en.html */
+#checkout-progress {
+    display: flex;
+    justify-content: space-between;
+    margin: 2rem 2rem 0 2rem;
+    counter-reset: li
+}
+#checkout-progress li {
+    counter-increment: li;
+    display: flex;
+    align-items: center;
+}
+#checkout-progress li:before {
+    content: counter(li); 
+    color: #cfece8;
+    background-color: #55536a;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 0.5rem;
+}
+#checkout-progress li a,
+#checkout-navigation li a {
+    text-decoration: none;
+}
+#checkout-progress li.current:before {
+    color: white;
+    background-color: #49b6a8;
+    font-weight: bold;
+}
+#carrello,
+#ordini {
+    margin: 2rem auto;
+}
+#carrello thead,
+#ordini thead {
+    background-color: #cfece8;
+}
+#carrello th,
+#ordini th {
+    vertical-align: middle;
+    padding: 0.5rem 1rem;
+}
+/* specifica i figli pari (even) e quelli dispari (odd) */
+#carrello tbody tr:nth-child(even),
+#carrello tfoot tr:nth-child(even),
+#ordini tbody tr:nth-child(even) {
+    background-color: white;
+}
+#carrello td,
+#ordini td {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    /* stabilisce l'allineamento verticale per gli elementi inline e le celle delle tabelle*/
+    vertical-align: middle;
+}
+#carrello td a,
+#ordini td a {
+    text-decoration: none;
+    font-weight: bold;
+}
+#carrello td h3,
+#ordini td h3 {
+    margin-bottom: 0.5rem;
+}
+#carrello .thumb img {
+    width: 100px;
+}
+#carrello .prices .scontato span:nth-child(1),
+#pagina-prodotto .prices .scontato span:nth-child(1) {
+    text-decoration: line-through;
+}
+#carrello .prices .scontato .sconto,
+#pagina-prodotto .prices .scontato .sconto {
+    vertical-align: super;
+    font-style: italic;
+}
+#carrello input[type="number"] {
+    margin-right: 1rem;
+}
+#carrello tfoot td:last-child {
+    padding: 0.5rem;
+}
+#checkout-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin: 2rem;
+}
+/* -------- PAGINA ACCOUNT ----------- */
+#pagina-account {
+    display: flex;
+    /* specifica che gli elementi all'interno dovranno distribuirsi in modo da avere uguale spazio ai lati*/
+    justify-content: space-around;
+    width: 100%;
+    /* specifica che glie elementi all'interno possono andare a capo */
+    flex-wrap: wrap;
+}
+#pagina-account section {
+    padding: 1rem;
+    margin: 1rem;
+    flex-grow: 1;
+    flex-shrink: 1;
+    /* calc esegue l'operazione, necessario perchè la width degli elementi + il padding + il margin fanno più del 100%  */
+    flex-basis: calc(50% - 4rem);
+}
+#info .form-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+#indirizzi {
+    margin: 2rem;
+}
+#indirizzi li {
+    padding-bottom: 1rem;
+}
+#indirizzi .tipo {
+    font-style: italic;
+    margin-bottom: 0.5rem;
+}
+#indirizzi li p:last-child {
+    margin-top: 0.5rem;
+}
+details {
+    margin: 2rem;
+}
+details .wishlist a {
+    display: block;
+    padding-top: 0.5rem;
+    text-decoration: none;
+}
+/* ------------ PAGINA IMPRESSIONISMO -------- */
+#impressionismo {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+#impressionismo li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 4rem;
+    padding: 1rem;
+    width: 100%;
+}
+#impressionismo li:nth-child(even) {
+    background-color: white;
+}
+#impressionismo li:nth-child(odd) {
+    background-color: #e8e8ed;
+}
+#impressionismo .descrizione {
+    width: 100%;
+    height: 300px;
+}
+#impressionismo .descrizione a {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+    text-decoration: none;
+}
+#impressionismo .mappa-sx .descrizione a{
+    align-items: flex-end;
+}
+#impressionismo .mappa-dx .descrizione a{
+    align-items: flex-start;
+}
+#impressionismo .fa-long-arrow-alt-right,
+#impressionismo .fa-long-arrow-alt-left {
+    margin-right: 1rem;
+    margin-left: 1rem;
+}
+/* ------------ PAGINA PRODOTTO ---------- */
+#pagina-prodotto {
+    display: flex;
+    flex-wrap: wrap;
+}
+#pagina-prodotto .half {
+    width: 50%;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 50%;
+    /* vh significa viewport height, 1vh è 1/100 dell'altezza della finestra */
+    height: 100vh;
+}
+#pagina-prodotto .left {
+    position: relative;
+    overflow: hidden;
+}
+#pagina-prodotto .left img {
+    height: 100%;
+}
+#pagina-prodotto .left .img-big {
+    position: absolute;
+    left: 0%;
+    top: 00%;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    /* specifica che gli elementi devono allinearsi al centro verticalmente */
+    align-items: center;
+    color: white;
+    opacity: 0;
+    transition: opacity linear 0.5s;
+}
+#pagina-prodotto .left .img-big button {
+    font-size: 2rem;
+    color: white;
+}
+#pagina-prodotto .left:hover .img-big {
+    opacity: 1;
+    /* proprietà da animare, velocità dell'animazione e durata */
+    transition: opacity linear 0.5s;
+}
+#pagina-prodotto .dettagli {
+    display: flex;
+    /* specifica che gli elementi si devono disporre sull'asse verticale*/
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+}
+/*  con il selettore > si selezionano solo gli elementi direttamente discendenti */
+#pagina-prodotto .dettagli > * {
+    padding: 2rem;
+}
+/* -------- HO DOVUTO FARE QUESTO PERCHE' IL VALIDATORE DELL'ACCESSIBILITA' NON MI FACEVA METTERE L'H3 PRIMA DELL'H2 ------- */
+#pagina-prodotto .dettagli .autore-titolo {
+    display: flex;
+    flex-direction: column-reverse;
+}
+#pagina-prodotto .dettagli .autore-titolo a {
+    text-decoration: none;
+}
+#pagina-prodotto .dettagli .rating .fas.fa-star {
+    color: gold;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
+#pagina-prodotto .dettagli .prices {
+    display: flex;
+    align-items: center;
+}
+#pagina-prodotto .dettagli .prices > p {
+    margin-right: 1rem;
+}
+#pagina-prodotto .dettagli #cta a,
+#pagina-prodotto .dettagli #wishlist a {
+    display: block;
+    padding: 0.7rem 1.2rem;
+    margin-bottom: 1rem;
+    border-radius: 20px;
+    text-decoration: none;
+}
+#pagina-prodotto .dettagli #cta a {
+    color: white;
+}
+#pagina-prodotto .dettagli #wishlist a {
+    border: 1px solid #55536a;
+}
+#pagina-prodotto .dettagli .icons {
+    display: flex;
+}
+#pagina-prodotto .dettagli .icons li {
+    margin-right: 1rem;
+}
+/* --------------- PAGINA RICERCA -------------------- */
+.info-ricerca {
+    margin-top: 1rem;
+    line-height: 1.5rem;
+}
+.domanda {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-top: dotted 0.5px  rgba(73,73,94,0.5);
+}
+.domanda legend {
+    font-size: 1.2rem;
+    padding-top: 1.5rem;
+}
+.domanda label {
+    margin-right: 2.3rem;
+    line-height: 2.3rem;
+}
+.domanda label:hover {
+    color: #49b6a8;
+    cursor: pointer;
+}
+.nr-domanda {
+    padding: 0 0.5rem;
+    font-size: 1.5rem;
+    font-style: italic;
+}
+.video-container,
+.form-container {
+    margin-top: 2rem;
+}
+/* ------------- PAGINA CONTATTI --------------------- */
+#contatti button:hover,
+#info button:hover,
+#ricerca button:hover {
+    color:#55536a;
+    background-color: #cfece8;
+    transition: opacity linear 0.5s;
+}
+
+/* ---------- RESPONSIVE ------------- */
+@media only screen and (max-width: 600px) {
+    #impressionismo .mappa,
+    #impressionismo .descrizione > p {
+      display: none;
+    }
+    #impressionismo .mappa-sx .descrizione a,
+    #impressionismo .mappa-dx .descrizione a {
+        align-items: flex-start;
+    }
+  }

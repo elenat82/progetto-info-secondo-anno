@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tali e Quadri</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="https://kit.fontawesome.com/6d3b88364d.js" crossorigin="anonymous"></script>
+</head>
+
+<body class="light-background">
+    <header>
+        <div id="topbar">
+            <form action="#" method="get" id="cerca" role="search">
+                <label for="keyword">Cerca</label>
+                <input type="search" name="keyword" id="keyword" maxlength="50"
+                    aria-label="Cerca per artista, titolo o parola chiave" aria-placeholder="Cerca"
+                    placeholder="Cerca..."> <button
+                    class="primary-background text-bold"><span class="fas fa-search secondary-color-light" aria-hidden="true"></span></button>
+            </form>
+            <div id="logo" class="text-center">
+                <a href="index.html" title="Home">
+                    <img src="img/logo.svg" alt="Logo" width="100">
+                    <h1 class="primary-color text-right text-bold">Tali e Quadri<span>FALSI D'AUTORE</span></h1>
+                </a>
+            </div>
+            <ul id="user-menu">
+                <li><a href="account.html" title="Vai alla pagina Account"><span class="far fa-user primary-color" aria-hidden="true"></span>
+                        Account</a></li>
+                <li><a href="carrello.html" title="Vai alla pagina Carrello"><span class="fas fa-shopping-cart primary-color" aria-hidden="true"></span> Carrello</a></li>
+            </ul>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html" title="Vai alla pagina Home" accesskey="h" class="primary-color text-bold">HOME</a></li>
+                <li><a href="#" title="Vai alla pagina Chi siamo" accesskey="s" class="primary-color text-bold">CHI SIAMO</a></li>
+                <li><a href="#" title="Vai alla pagina Stili Pittorici" accesskey="p" class="primary-color text-bold">STILI PITTORICI</a></li>
+                <li><a href="#" title="Vai alla pagina Artisti" accesskey="a" class="primary-color text-bold">ARTISTI</a></li>
+                <li><a href="contatti.html" title="Vai alla pagina Contatti" accesskey="c" class="primary-color text-bold">CONTATTI</a></li>
+                <li><a href="lavora-con-noi.html" title="Vai alla pagina Lavora con noi" accesskey="l" class="primary-color text-bold">LAVORA CON NOI</a></li>
+                <li><a href="ricerca.html" title="Vai alla pagina Ricerca" accesskey="r" class="secondary-background-dark text-bold">Partecipa alla ricerca!</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <ol class="breadcrumbs">
+            <li><a href="index.html" title="Vai alla Home" class="text-bold">Home</a></li>
+            <li class="last">Ricerca</li>
+        </ol>
+        <h2>Partecipa alla ricerca!</h2>
+        <p class="info-ricerca">Compila il questionario per partecipare alla ricerca sociologica sul tema <strong class="primary-color text-bold">"Il consumatore di prodotti non originali"</strong>, guarda il video per saperne di più.</p>
+        <p class="info-ricerca">Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni, rerum quisquam ex libero sit nihil possimus eaque deserunt error adipisci. Voluptates at autem recusandae ducimus hic non similique sapiente sequi?</p>
+        <section class="video-container">
+            <h3>Guarda il video!</h3>
+            <video controls preload="metadata">
+                <source src="video/video.mp4" type="video/mp4">
+                <source src="video/video.webm" type="video/webm">
+                <track label="Italiano" kind="subtitles" srclang="it" src="video/video.vtt">
+                <p>Il tuo browser non supporta i video. Ecco un <a href="video.mp4" title="Scarica il video">link alvideo</a> che puoi scaricare.</p>
+            </video>
+        </section>
+        <section class="form-container">
+            <h3>Rispondi alle domande!</h3>
+            <form action="thankyou-page.html" method="post" id="ricerca">
+                <fieldset class="domanda">
+                    <legend id="domanda-1" class="primary-color text-bold"><span class="nr-domanda">1.</span> In che zona d'Italia è residente attualmente?</legend>
+                    <input type="radio" name="risposta-1" id="nord-it" value="nord">
+                    <label for="nord-it">Nord</label>
+                    <input type="radio" name="risposta-1" id="centro-it" value="centro">
+                    <label for="centro-it">Centro</label>
+                    <input type="radio" name="risposta-1" id="sud-it" value="sud">
+                    <label for="sud-it">Sud</label>
+                </fieldset>
+
+                <fieldset class="domanda">
+                    <legend id="domanda-2" class="primary-color text-bold"><span class="nr-domanda">2.</span> Qual è il suo reddito annuo lordo attuale?
+                    </legend>
+                    <input type="radio" name="risposta-2" id="basso" value="basso">
+                    <label for="basso">Da 0 a 18.000</label>
+                    <input type="radio" name="risposta-2" id="medio" value="medio">
+                    <label for="medio">Da 19.000 a 30.000</label>
+                    <input type="radio" name="risposta-2" id="alto" value="alto">
+                    <label for="alto">Da 31.000 in su</label>
+                </fieldset>
+
+                <fieldset class="domanda">
+                    <legend id="domanda-3" class="primary-color text-bold"><span class="nr-domanda">3.</span> Qual è il suo livello di istruzione attualmente?</legend>
+                    <input type="radio" name="risposta-3" id="elementare" value="elementare">
+                    <label for="elementare">Licenza elementare</label>
+                    <input type="radio" name="risposta-3" id="media" value="media">
+                    <label for="media">Licenza media</label>
+                    <input type="radio" name="risposta-3" id="diploma" value="diploma">
+                    <label for="diploma">Diploma</label>
+                    <input type="radio" name="risposta-3" id="laurea" value="laurea">
+                    <label for="laurea">Laurea</label>
+                    <input type="radio" name="risposta-3" id="altro-3" value="altro">
+                    <label for="altro-3">Altro/Non applicabile</label>
+                </fieldset>
+
+                <fieldset class="domanda">
+                    <legend id="domanda-4" class="primary-color text-bold"><span class="nr-domanda">4.</span> Nell'ultimo anno, quante volte ha acquistato un prodotto non originale?</legend>
+                    <input type="radio" name="risposta-4" id="mai" value="mai">
+                    <label for="mai">Mai</label>
+                    <input type="radio" name="risposta-4" id="raramente" value="raramente">
+                    <label for="raramente">Meno di 5 volte</label>
+                    <input type="radio" name="risposta-4" id="spesso" value="spesso">
+                    <label for="spesso">Da 5 a 10 volte</label>
+                    <input type="radio" name="risposta-4" id="assiduamente" value="assiduamente">
+                    <label for="assiduamente">Più di 10 volte</label>
+                </fieldset>
+
+                <fieldset class="domanda">
+                    <legend id="domanda-5" class="primary-color text-bold"><span class="nr-domanda">5.</span> Nell'ultimo anno, quali delle seguenti tipologie di prodotto ha acquistato?</legend>
+                    <input type="checkbox" name="risposta-5" id="alimentari" value="alimentari">
+                    <label for="alimentari">Alimentari</label>
+                    <input type="checkbox" name="risposta-5" id="abbigliamento" value="abbigliamento">
+                    <label for="abbigliamento">Abbigliamento e/o accessori</label>
+                    <input type="checkbox" name="risposta-5" id="cosmetici" value="cosmetici">
+                    <label for="cosmetici">Cosmetici e/o profumi</label>
+                    <input type="checkbox" name="risposta-5" id="gioielli" value="gioielli">
+                    <label for="gioielli">Gioielli e/o orologi</label>
+                    <input type="checkbox" name="risposta-5" id="altro-5" value="altro">
+                    <label for="altro-5">Altro</label>
+                </fieldset>
+
+                <fieldset class="domanda">
+                    <legend id="domanda-6" class="primary-color text-bold"><span class="nr-domanda">6.</span> L'ultima volta che ha acquistato un prodotto non originale, da quale venditore l'ha acquistato?</legend>
+                    <input type="radio" name="risposta-6" id="strada" value="strada">
+                    <label for="strada">Da un venditore di strada</label>
+                    <input type="radio" name="risposta-6" id="bancarella" value="bancarella">
+                    <label for="bancarella">Da una bancarella</label>
+                    <input type="radio" name="risposta-6" id="internet" value="internet">
+                    <label for="internet">Su internet</label>
+                    <input type="radio" name="risposta-6" id="altro-6" value="altro">
+                    <label for="altro-6">Altro / non applicabile</label>
+                </fieldset>
+
+                <fieldset class="domanda">
+                    <legend id="domanda-7" class="primary-color text-bold"><span class="nr-domanda">7.</span> L'ultima volta che ha acquistato un prodotto non originale, in che luogo l'ha acquistato?</legend>
+                    <input type="radio" name="risposta-7" id="centro" value="centro">
+                    <label for="centro">In centro nella mia città</label>
+                    <input type="radio" name="risposta-7" id="periferia" value="periferia">
+                    <label for="periferia">Nella periferia della mia città</label>
+                    <input type="radio" name="risposta-7" id="vacanza" value="vacanza">
+                    <label for="vacanza">In un luogo di vacanza</label>
+                    <input type="radio" name="risposta-7" id="altro-7" value="altro">
+                    <label for="altro-7">Altro / non applicabile</label>
+                </fieldset>
+
+                <fieldset class="domanda">
+                    <legend id="domanda-8" class="primary-color text-bold"><span class="nr-domanda">8.</span> L'ultima volta che ha acquistato un prodotto non originale, con chi era?</legend>
+                    <input type="radio" name="risposta-8" id="solo" value="solo">
+                    <label for="solo">Da solo/a</label>
+                    <input type="radio" name="risposta-8" id="altri-no" value="altri-no">
+                    <label for="altri-no">Con altre persone ma loro non hanno acquistato un prodotto non originale</label>
+                    <input type="radio" name="risposta-8" id="altri-si" value="altri-si">
+                    <label for="altri-si">Con altre persone e anche loro hanno acquistato un prodotto non originale</label>
+                    <input type="radio" name="risposta-8" id="altro-8" value="altro">
+                    <label for="altro-8">Altro / non applicabile</label>
+                </fieldset>
+
+                <fieldset class="domanda">
+                    <legend id="domanda-9" class="primary-color text-bold"><span class="nr-domanda">9.</span> Ripensando all'ultima volta che ha acquistato un prodotto non originale, lo definirebbe un acquisto:</legend>
+                    <input type="radio" name="risposta-9" id="impulso" value="impulso">
+                    <label for="impulso">D'impulso, ho acquistato senza pensare</label>
+                    <input type="radio" name="risposta-9" id="pianificato" value="pianificato">
+                    <label for="pianificato">Pianificato, sono andato/a cercare quello specifico prodotto</label>
+                    <input type="radio" name="risposta-9" id="ripiego" value="ripiego">
+                    <label for="ripiego">Un ripiego, ho acquistato quel prodotto perchè non ho potuto acquistare l'originale</label>
+                    <input type="radio" name="risposta-9" id="altro-9" value="altro">
+                    <label for="altro-9">Altro / non applicabile</label>
+                </fieldset>
+
+                <fieldset class="domanda">
+                    <legend id="domanda-10" class="primary-color text-bold"><span class="nr-domanda">10.</span> Ripensando all'ultima volta che ha acquistato un prodotto non originale, quali sono state le sue motivazioni?</legend>
+                    <input type="checkbox" name="risposta-10" id="risparmio" value="risparmio">
+                    <label for="risparmio">Per risparmiare</label>
+                    <input type="checkbox" name="risposta-10" id="moda" value="moda">
+                    <label for="moda">Per essere alla moda</label>
+                    <input type="checkbox" name="risposta-10" id="qualita" value="qualita">
+                    <label for="qualita">Perchè la qualità è la stessa dell'originale</label>
+                    <input type="checkbox" name="risposta-10" id="perdita" value="perdita">
+                    <label for="perdita">Perchè non perdo molto se si rovina</label>
+                    <input type="checkbox" name="risposta-10" id="altro-10" value="altro">
+                    <label for="altro-10">Altro / non applicabile</label>
+                </fieldset>
+
+                <fieldset class="domanda">
+                    <legend id="domanda-11" class="primary-color text-bold"><span class="nr-domanda">11.</span> Dopo l'ultima volta che ha acquistato un prodotto non originale, che sentimenti ha provato?</legend>
+                    <input type="checkbox" name="risposta-11" id="entusiasmo" value="entusiasmo">
+                    <label for="entusiasmo">Entusiasmo per il nuovo prodotto</label>
+                    <input type="checkbox" name="risposta-11" id="soddisfazione" value="soddisfazione">
+                    <label for="soddisfazione">Soddisfazione per aver risparmiato</label>
+                    <input type="checkbox" name="risposta-11" id="preoccupazione" value="preoccupazione">
+                    <label for="preoccupazione">Preoccupazione per eventuali controlli legali</label>
+                    <input type="checkbox" name="risposta-11" id="delusione" value="delusione">
+                    <label for="delusione">Delusione per non aver potuto acquistare l'originale</label>
+                    <input type="checkbox" name="risposta-11" id="imbarazzo" value="imbarazzo">
+                    <label for="imbarazzo">Imbarazzo per aver contravvenuto alle regole</label>
+                    <input type="checkbox" name="risposta-11" id="altro-11" value="altro">
+                    <label for="altro-11">Altro / non applicabile</label>
+                </fieldset>
+
+                <fieldset class="domanda">
+                    <legend id="domanda-12" class="primary-color text-bold"><span class="nr-domanda">12.</span> Indichi quanto è d'accordo con la seguente affermazione: I prodotti originali sono ingiustificatamente cari</legend>
+                    <input type="radio" name="risposta-12" id="niente-12" value="1">
+                    <label for="niente-12">Per niente d'accordo</label>
+                    <input type="radio" name="risposta-12" id="parzialmente-12" value="2">
+                    <label for="parzialmente-12">Parzialmente d'accordo</label>
+                    <input type="radio" name="risposta-12" id="daccordo-12" value="daccordo">
+                    <label for="daccordo-12">D'accordo</label>
+                    <input type="radio" name="risposta-12" id="totalmente-12" value="3">
+                    <label for="totalmente-12">Totalmente d'accordo</label>
+                </fieldset>
+
+                <fieldset class="domanda">
+                    <legend id="domanda-13" class="primary-color text-bold"><span class="nr-domanda">13.</span> Indichi quanto è d'accordo con la seguente affermazione: I controlli sui prodotti non originali sono inefficaci</legend>
+                    <input type="radio" name="risposta-13" id="niente-13" value="1">
+                    <label for="niente-13">Per niente d'accordo</label>
+                    <input type="radio" name="risposta-13" id="parzialmente-13" value="2">
+                    <label for="parzialmente-13">Parzialmente d'accordo</label>
+                    <input type="radio" name="risposta-13" id="daccordo-13" value="daccordo">
+                    <label for="daccordo-13">D'accordo</label>
+                    <input type="radio" name="risposta-13" id="totalmente-13" value="3">
+                    <label for="totalmente-13">Totalmente d'accordo</label>
+                </fieldset>
+                <div>
+                    <button type="submit" class="primary-background secondary-color-light text-bold">INVIA</button>
+                </div>
+            </form>
+        </section>
+
+
+    </main>
+    <footer>
+        <p class="text-center">
+            <small>Copyright 2021: Daniele Zamboni & Elena Trudini
+                <br>Progetto creato in gruppo collaborativo. <br>
+                Tutti i diritti sono riservati agli sviluppatori.
+            </small>
+        </p>
+        <img src="icone/unitoCampusnet.svg" alt="Icona Unito">
+        <ul class="icons">
+            <li><a href="https://it-it.facebook.com/" title="Vai alla pagina Facebook" target="_blank"><span class="fab fa-facebook" aria-hidden="true"></span></a></li>
+            <li><a href="https://www.instagram.com/" title="Vai alla pagina Instagram" target="_blank"><span class="fab fa-instagram-square" aria-hidden="true"></span></a></li>
+            <li><a href="https://www.pinterest.it/" title="Vai alla pagina Pinterest" target="_blank"><span class="fab fa-pinterest" aria-hidden="true"></span></a></li>
+        </ul>
+    </footer>
+</body>
+
+</html>
