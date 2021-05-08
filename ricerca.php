@@ -64,7 +64,7 @@
         </section>
         <section class="form-container">
             <h3>Rispondi alle domande!</h3>
-            <form action="thankyou-page.html" method="post" id="ricerca">
+            <form action="thankyou-page.php" method="post" id="ricerca">
                 <fieldset class="domanda">
                     <legend id="domanda-1" class="primary-color text-bold"><span class="nr-domanda">1.</span> In che zona d'Italia è residente attualmente?</legend>
                     <input type="radio" name="risposta-1" id="nord-it" value="nord">

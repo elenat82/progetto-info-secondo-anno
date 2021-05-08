@@ -18,7 +18,8 @@
                 <label for="keyword">Cerca</label>
                 <input type="search" name="keyword" id="keyword" maxlength="50"
                     aria-label="Cerca per artista, titolo o parola chiave" aria-placeholder="Cerca"
-                    placeholder="Cerca..."> <button class="primary-background text-bold"><span class="fas fa-search secondary-color-light" aria-hidden="true"></span></button>
+                    placeholder="Cerca..."> <button class="primary-background text-bold"><span
+                        class="fas fa-search secondary-color-light" aria-hidden="true"></span></button>
             </form>
             <div id="logo" class="text-center">
                 <a href="index.html" title="Home">
@@ -29,46 +30,41 @@
             <ul id="user-menu">
                 <li><a href="account.html" title="Vai alla pagina Account"><span class="far fa-user primary-color" aria-hidden="true"></span>
                         Account</a></li>
-                <li><a href="carrello.html" title="Vai alla pagina Carrello"><span
-                            class="fas fa-shopping-cart primary-color" aria-hidden="true"></span> Carrello</a></li>
+                <li><a href="carrello.html" title="Vai alla pagina Carrello"><span class="fas fa-shopping-cart primary-color" aria-hidden="true"></span> Carrello</a></li>
             </ul>
         </div>
         <nav>
             <ul>
-                <li><a href="index.html" title="Vai alla pagina Home" accesskey="h" class="primary-color text-bold menu-active">HOME</a></li>
+                <li><a href="index.html" title="Vai alla pagina Home" accesskey="h" class="primary-color text-bold">HOME</a></li>
                 <li><a href="#" title="Vai alla pagina Chi siamo" accesskey="s" class="primary-color text-bold">CHI SIAMO</a></li>
                 <li><a href="#" title="Vai alla pagina Stili Pittorici" accesskey="p" class="primary-color text-bold">STILI PITTORICI</a></li>
                 <li><a href="#" title="Vai alla pagina Artisti" accesskey="a" class="primary-color text-bold">ARTISTI</a></li>
-                <li><a href="contatti.html" title="Vai alla pagina Contatti" accesskey="c" class="primary-color text-bold">CONTATTI</a></li>
+                <li><a href="contatti.html" title="Vai alla pagina Contatti" accesskey="c" class="primary-color text-bold menu-active">CONTATTI</a></li>
                 <li><a href="lavora-con-noi.html" title="Vai alla pagina Lavora con noi" accesskey="l" class="primary-color text-bold">LAVORA CON NOI</a></li>
-                <li><a href="ricerca.html" title="Vai alla pagina Ricerca" accesskey="r" class="secondary-background-dark text-bold">Partecipa alla ricerca!</a></li>
+                <li><a href="ricerca.html" title="Vai alla pagina Ricerca" accesskey="r"
+                        class="secondary-background-dark text-bold">Partecipa alla ricerca!</a></li>
             </ul>
         </nav>
     </header>
     <main>
-        <!-- https://html.spec.whatwg.org/multipage/grouping-content.html#the-blockquote-element -->
-        <blockquote>
-            <p>La pittura è una lunga fatica di imitazione di ciò che si ama.</p>
-        </blockquote>
-        <p class="autore-citazione">— Renato Guttuso</p>
-        <h2 class="primary-color">I nostri stili pittorici</h2>
-        <ul id="categorie">
-            <li class="impressionismo"><a href="impressionismo.html" title="Vai alla pagina Impressionismo" class="text-bold">IMPRESSIONISMO</a></li>
-            <li class="cubismo"><a href="#" title="Vai alla pagina Cubismo" class="text-bold">CUBISMO</a></li>
-            <li class="puntinismo"><a href="#" title="Vai alla pagina Puntinismo" class="text-bold">PUNTINISMO</a></li>
-            <li class="futurismo"><a href="#" title="Vai alla pagina Futurismo" class="text-bold">FUTURISMO</a></li>
-            <li class="iperrealismo"><a href="#" title="Vai alla pagina Iperrealismo" class="text-bold">IPERREALISMO</a></li>
-            <li class="pop-art"><a href="#" title="Vai alla pagina Pop Art" class="text-bold">POP ART</a></li>
-            <li class="surrealismo"><a href="#" title="Vai alla pagina Surrealismo" class="text-bold">SURREALISMO</a></li>
-            <li class="naif"><a href="#" title="Vai alla pagina Naif" class="text-bold">NAIF</a></li>
-        </ul>
-
-        <h2 class="primary-color">I nostri artisti</h2>
-        <ul id="artisti">
-            <li class="monetti"><a href="#" title="Vai alla pagina di Claudio Monetti" class="text-bold">Claudio Monetti</a></li>
-            <li class="goghi"><a href="#" title="Vai alla pagina di Vincenzo Goghi" class="text-bold">Vincenzo Goghi</a></li>
-            <li class="picassi"><a href="#" title="Vai alla pagina di Paolo Picassi" class="text-bold">Paolo Picassi</a></li>
-        </ul>
+        <ol class="breadcrumbs">
+            <li><a href="index.html" title="Vai alla Home" class="text-bold">Home</a></li>
+            <li class="last">Contatti</li>
+        </ol>
+        <h2>Contatti</h2>
+        <div class="container_form">
+            <form action="thankyou-page.php" method="POST" id="contatti">
+                <label for="nome">Nome <span>*</span></label>
+                <input type="text" id="nome" name="nome" placeholder="Inserisci il tuo nome" required maxlength="50">
+                <label for="cognome">Cognome <span>*</span></label>
+                <input type="text" id="cognome" name="cognome" placeholder="Inserisci il tuo congnome" required maxlength="50">
+                <label for="email">E-mail <span>*</span></label>
+                <input type="email" id="email" name="email" placeholder="Inserisci la tua email" required maxlength="50">
+                <label for="messaggio">Messaggio <span>*</span></label>
+                <textarea id="messaggio" name="messaggio" placeholder="Inserisci il tuo messaggio" rows="5" required></textarea>
+                <button type="submit" class="primary-background secondary-color-light text-bold">INVIA</button>
+            </form>
+        </div>
     </main>
     <footer>
         <p class="text-center">
@@ -85,4 +81,5 @@
         </ul>
     </footer>
 </body>
+
 </html>

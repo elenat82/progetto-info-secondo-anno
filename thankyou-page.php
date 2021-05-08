@@ -1,3 +1,22 @@
+<?php 
+// account
+$email = $_POST["email"];
+echo $email;
+$nome = $_POST["nome"];
+echo $nome;
+$cognome = $_POST["cognome"];
+echo $cognome;
+$nascita = $_POST["nascita"];
+echo $nascita;
+$sesso = $_POST["sesso"];
+echo $sesso;
+$oldpassword = $_POST["oldpassword"];
+echo $oldpassword;
+$newpassword = $_POST["newpassword"];
+echo $newpassword;
+
+
+?>
 <!DOCTYPE html>
 <html lang="it">
 

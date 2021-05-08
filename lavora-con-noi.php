@@ -48,7 +48,7 @@
     <main>
         <h2>Lavora con noi</h2>
         <p class="hint">Sei un artista? Vuoi lavorare con noi? Allora compila il form!</p>
-        <form action="thankyou-page.html" method="post" id="job">
+        <form action="thankyou-page.php" method="post" id="job">
             <div>
                 <label for="nome">Nome <span>*</span></label>
                 <input type="text" name="nome" id="nome" placeholder="Inserisci il tuo nome" required maxlength="50">

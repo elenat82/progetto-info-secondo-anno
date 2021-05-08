@@ -52,7 +52,7 @@
         <div id="pagina-account">
             <section>
                 <h3>Informazioni personali</h3>
-                <form action="thankyou-page.html" method="post" id="info">
+                <form action="thankyou-page.php" method="post" id="info">
                     <div>
                         <label for="email">E-mail <span>*</span></label>
                         <input type="email" name="email" id="email" value="mario@libero.it"
