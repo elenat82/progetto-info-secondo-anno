@@ -272,19 +272,23 @@ hr {
 #logo a {
     text-decoration: none;
 }
-#user-menu {
+#user-menu, 
+#user-menu-2 {
     display: flex;
     /* specifica che gli elementi all'interno devono distribuirsi alla fine */
     justify-content: flex-end;
     padding: 2rem;
 }
-#user-menu li a {
+#user-menu li a,
+#user-menu-2 li a {
     text-decoration: none;
     padding: 1rem;
     transition: all linear 0.3s;
 }
 #user-menu li:hover a,
-#user-menu li:hover span {
+#user-menu-2 li:hover a,
+#user-menu li:hover span,
+#user-menu-2 li:hover span {
     background-color: #55536a;
     color: #cfece8;
     transition: all linear 0.3s;
@@ -420,7 +424,7 @@ blockquote {
     background-image: linear-gradient( to right,  #be0bd7, #f6ea0b);
 }
 /* ------- PAGINA CARRELLO --------- */
-/* https://www.w3.org/Style/Examples/007/color-bullets.en.html */
+/* https://www.w3.org/Style/Examples/007/color-bullets.en.php */
 #checkout-progress {
     display: flex;
     justify-content: space-between;
@@ -595,11 +599,13 @@ details .wishlist a {
     margin-left: 1rem;
 }
 /* ------------ PAGINA PRODOTTO ---------- */
-#pagina-prodotto {
+#pagina-prodotto,
+#pagina-accedi {
     display: flex;
     flex-wrap: wrap;
 }
-#pagina-prodotto .half {
+#pagina-prodotto .half,
+#pagina-accedi .half{
     width: 50%;
     flex-grow: 1;
     flex-shrink: 1;

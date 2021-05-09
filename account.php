@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="it">
 
@@ -12,70 +13,40 @@
 </head>
 
 <body class="light-background">
-    <header>
-        <div id="topbar">
-            <form action="#" method="get" id="cerca" role="search">
-                <label for="keyword">Cerca</label>
-                <input type="search" name="keyword" id="keyword" maxlength="50"
-                    aria-label="Cerca per artista, titolo o parola chiave" aria-placeholder="Cerca..."
-                    placeholder="Cerca..."> <button class="primary-background text-bold"><span class="fas fa-search secondary-color-light" aria-hidden="true"></span></button>
-            </form>
-            <div id="logo" class="text-center">
-                <a href="index.html" title="Home">
-                    <img src="img/logo.svg" alt="Logo" width="100">
-                    <h1 class="primary-color text-right text-bold">Tali e Quadri<span>FALSI D'AUTORE</span></h1>
-                </a>
-            </div>
-            <ul id="user-menu">
-                <li><a href="account.html" title="Vai alla pagina Account"><span class="far fa-user primary-color" aria-hidden="true"></span> Account</a></li>
-                <li><a href="carrello.html" title="Vai alla pagina Carrello"><span class="fas fa-shopping-cart primary-color" aria-hidden="true"></span> Carrello</a></li>
-            </ul>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="index.html" title="Vai alla pagina Home" accesskey="h" class="primary-color text-bold">HOME</a></li>
-                <li><a href="#" title="Vai alla pagina Chi siamo" accesskey="s" class="primary-color text-bold">CHI SIAMO</a></li>
-                <li><a href="#" title="Vai alla pagina Stili Pittorici" accesskey="p" class="primary-color text-bold">STILI PITTORICI</a></li>
-                <li><a href="#" title="Vai alla pagina Artisti" accesskey="a" class="primary-color text-bold">ARTISTI</a></li>
-                <li><a href="contatti.html" title="Vai alla pagina Contatti" accesskey="c" class="primary-color text-bold">CONTATTI</a></li>
-                <li><a href="lavora-con-noi.html" title="Vai alla pagina Lavora con noi" accesskey="l" class="primary-color text-bold">LAVORA CON NOI</a></li>
-                <li><a href="ricerca.html" title="Vai alla pagina Ricerca" accesskey="r" class="secondary-background-dark text-bold">Partecipa alla ricerca!</a></li>
-            </ul>
-        </nav>
-    </header>
+    <?php include("includes/template_header.php") ?>
     <main>
         <ol class="breadcrumbs">
-            <li><a href="index.html" title="Vai alla Home" class="text-bold">Home</a></li>
+            <li><a href="index.php" title="Vai alla Home" class="text-bold">Home</a></li>
             <li class="last">Account</li>
         </ol>
-        <h2>Benvenuto, Mario!</h2>
+        <h2>Benvenuto, <?php  echo $_SESSION["nome"];?>!</h2>
         <div id="pagina-account">
             <section>
                 <h3>Informazioni personali</h3>
                 <form action="thankyou-page.php" method="post" id="info">
                     <div>
                         <label for="email">E-mail <span>*</span></label>
-                        <input type="email" name="email" id="email" value="mario@libero.it"
+                        <input type="email" name="email" id="email" value="<?php  echo $_SESSION["email"];?>"
                             placeholder="Inserisci il tuo indirizzo e-mail" required maxlength="50">
                     </div>
                     <div>
                         <label for="nome">Nome <span>*</span></label>
-                        <input type="text" name="nome" id="nome" value="Mario" placeholder="Inserisci il tuo nome" maxlength="50" required>
+                        <input type="text" name="nome" id="nome" value="<?php  echo $_SESSION["nome"];?>" placeholder="Inserisci il tuo nome" maxlength="50" required>
                         <label for="cognome">Cognome <span>*</span></label>
-                        <input type="text" name="cognome" id="cognome" value="Rossi" placeholder="Inserisci il tuo cognome" maxlength="50" required>
+                        <input type="text" name="cognome" id="cognome" value="<?php  echo $_SESSION["cognome"];?>" placeholder="Inserisci il tuo cognome" maxlength="50" required>
                     </div>
                     <div>
                         <label for="nascita">Data di nascita <span>*</span></label>
-                        <input type="date" name="nascita" id="nascita" value="2000-01-01"
+                        <input type="date" name="nascita" id="nascita" value="<?php  echo $_SESSION["datanascita"];?>"
                             required>
                     </div>
                     <fieldset>
                         <legend>Sesso <span>*</span></legend>
-                        <input type="radio" id="maschio" name="sesso" value="maschio" required checked>
+                        <input type="radio" id="maschio" name="sesso" value="m" required <?php  if ($_SESSION["sesso"] == "m") echo 'checked'; ?>>
                         <label for="maschio">Maschio</label>
-                        <input type="radio" id="femmina" name="sesso" value="femmina" required>
+                        <input type="radio" id="femmina" name="sesso" value="f" required <?php  if ($_SESSION["sesso"] == "f") echo 'checked'; ?>>
                         <label for="femmina">Femmina</label>
-                        <input type="radio" id="altro" name="sesso" value="altro" required>
+                        <input type="radio" id="altro" name="sesso" value="a" required <?php  if ($_SESSION["sesso"] == "a") echo 'checked'; ?>>
                         <label for="altro">Altro</label>
                     </fieldset>
                     <hr>
@@ -116,7 +87,7 @@
                             <td class="metodo-pagamento text-center"><span class="paypal"><span class="fab fa-paypal primary-color" aria-hidden="true"></span> PayPal</span></td>
                             <td class="stato-ordine text-center"><span class="evaso">Evaso</span></td>
                             <td class="text-center"><a href="fattura-JHAMHWDZI.pdf" title="Visualizza la fattura"><span class="fas fa-file-download" aria-hidden="true"></span></a></td>
-                            <td class="text-center"><a href="dettaglio.html" title="Visualizza il dettaglio">+ info</a></td>
+                            <td class="text-center"><a href="dettaglio.php" title="Visualizza il dettaglio">+ info</a></td>
                         </tr>
                         <tr>
                             <td class="n-ordine text-center">UDKQVHHQR</td>
@@ -125,7 +96,7 @@
                             <td class="metodo-pagamento text-center"><span class="credit-card"><span class="far fa-credit-card primary-color" aria-hidden="true"></span> Carta</span></td>
                             <td class="stato-ordine text-center"><span class="in-lavorazione">In lavorazione</span></td>
                             <td class="text-center"><a href="fattura-UDKQVHHQR.pdf" title="Visualizza la fattura"><span class="fas fa-file-download" aria-hidden="true"></span></a></td>
-                            <td class="text-center"><a href="dettaglio.html" title="Visualizza il dettaglio">+ info</a></td>
+                            <td class="text-center"><a href="dettaglio.php" title="Visualizza il dettaglio">+ info</a></td>
                         </tr>
                     </tbody>
                 </table>
@@ -172,22 +143,21 @@
                 </details>
     
             </section>
+            <section>
+            <ul id="user-menu-2">
+            <?php 
+            if (isset($_SESSION['loggato']) && $_SESSION['loggato'] == true) {
+                echo '<li><a href="logout.php" title="Vai alla pagina Logout"><span class="fas fa-sign-out-alt primary-color" aria-hidden="true"></span> Logout</a></li>';
+            }
+            else {
+                echo '<li>Nessun logout</li>';
+            }
+            ?>
+        </ul>
+            </section>
         </div>
     </main>
-    <footer>
-        <p class="text-center">
-            <small>Copyright 2021: Daniele Zamboni & Elena Trudini
-                <br>Progetto creato in gruppo collaborativo. <br>
-                Tutti i diritti sono riservati agli sviluppatori.
-            </small>
-        </p>
-        <img src="icone/unitoCampusnet.svg" alt="Icona Unito">
-        <ul class="icons">
-            <li><a href="https://it-it.facebook.com/" title="Vai alla pagina Facebook" target="_blank"><span class="fab fa-facebook" aria-hidden="true"></span></a></li>
-            <li><a href="https://www.instagram.com/" title="Vai alla pagina Instagram" target="_blank"><span class="fab fa-instagram-square" aria-hidden="true"></span></a></li>
-            <li><a href="https://www.pinterest.it/" title="Vai alla pagina Pinterest" target="_blank"><span class="fab fa-pinterest" aria-hidden="true"></span></a></li>
-        </ul>
-    </footer>
+    <?php include("includes/template_footer.php") ?>
 </body>
 
 </html>

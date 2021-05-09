@@ -12,42 +12,10 @@
 </head>
 
 <body class="light-background">
-    <header>
-        <div id="topbar">
-            <form action="#" method="get" id="cerca" role="search">
-                <label for="keyword">Cerca</label>
-                <input type="search" name="keyword" id="keyword" maxlength="50"
-                    aria-label="Cerca per artista, titolo o parola chiave" aria-placeholder="Cerca"
-                    placeholder="Cerca..."> <button class="primary-background text-bold"><span class="fas fa-search secondary-color-light" aria-hidden="true"></span></button>
-            </form>
-            <div id="logo" class="text-center">
-                <a href="index.html" title="Home">
-                    <img src="img/logo.svg" alt="Logo" width="100">
-                    <h1 class="primary-color text-right text-bold">Tali e Quadri<span>FALSI D'AUTORE</span></h1>
-                </a>
-            </div>
-            <ul id="user-menu">
-                <li><a href="account.html" title="Vai alla pagina Account"><span class="far fa-user primary-color" aria-hidden="true"></span>
-                        Account</a></li>
-                <li><a href="carrello.html" title="Vai alla pagina Carrello"><span
-                            class="fas fa-shopping-cart primary-color" aria-hidden="true"></span> Carrello</a></li>
-            </ul>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="index.html" title="Vai alla pagina Home" accesskey="h" class="primary-color text-bold">HOME</a></li>
-                <li><a href="#" title="Vai alla pagina Chi siamo" accesskey="s" class="primary-color text-bold">CHI SIAMO</a></li>
-                <li><a href="#" title="Vai alla pagina Stili Pittorici" accesskey="p" class="primary-color text-bold">STILI PITTORICI</a></li>
-                <li><a href="#" title="Vai alla pagina Artisti" accesskey="a" class="primary-color text-bold">ARTISTI</a></li>
-                <li><a href="contatti.html" title="Vai alla pagina Contatti" accesskey="c" class="primary-color text-bold">CONTATTI</a></li>
-                <li><a href="lavora-con-noi.html" title="Vai alla pagina Lavora con noi" accesskey="l" class="primary-color text-bold">LAVORA CON NOI</a></li>
-                <li><a href="ricerca.html" title="Vai alla pagina Ricerca" accesskey="r" class="secondary-background-dark text-bold">Partecipa alla ricerca!</a></li>
-            </ul>
-        </nav>
-    </header>
+    <?php include("includes/template_header.php") ?>
     <main>
         <ol class="breadcrumbs">
-            <li><a href="index.html" title="Vai alla Home" class="text-bold">Home</a></li>
+            <li><a href="index.php" title="Vai alla Home" class="text-bold">Home</a></li>
             <li class="last">Impressionismo</li>
         </ol>
         <h2>Impressionismo</h2>
@@ -93,7 +61,7 @@
                 </div>
                 <div class="descrizione">
                     <p><span class="fas fa-long-arrow-alt-left" aria-hidden="true"></span> Guarda l'originale</p>
-                    <a href="prodotto.html" title="Vai alla pagina Impressionismo - Claud Monet - Ninfee">
+                    <a href="prodotto.php" title="Vai alla pagina Impressionismo - Claud Monet - Ninfee">
                         <h3 class="text-bold">Claud Monet - Ninfee</h3>
                         <p><span>SKU: </span><span>CM11</span></p>
                         <div class="prices text-center">
@@ -198,19 +166,6 @@
 
         
     </main>
-    <footer>
-        <p class="text-center">
-            <small>Copyright 2021: Daniele Zamboni & Elena Trudini
-                <br>Progetto creato in gruppo collaborativo. <br>
-                Tutti i diritti sono riservati agli sviluppatori.
-            </small>
-        </p>
-        <img src="icone/unitoCampusnet.svg" alt="Icona Unito">
-        <ul class="icons">
-            <li><a href="https://it-it.facebook.com/" title="Vai alla pagina Facebook" target="_blank"><span class="fab fa-facebook" aria-hidden="true"></span></a></li>
-            <li><a href="https://www.instagram.com/" title="Vai alla pagina Instagram" target="_blank"><span class="fab fa-instagram-square" aria-hidden="true"></span></a></li>
-            <li><a href="https://www.pinterest.it/" title="Vai alla pagina Pinterest" target="_blank"><span class="fab fa-pinterest" aria-hidden="true"></span></a></li>
-        </ul>
-    </footer>
+    <?php include("includes/template_footer.php") ?>
 </body>
 </html>
