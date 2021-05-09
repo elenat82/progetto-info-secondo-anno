@@ -1,22 +1,4 @@
-<?php 
-// account
-$email = $_POST["email"];
-echo $email;
-$nome = $_POST["nome"];
-echo $nome;
-$cognome = $_POST["cognome"];
-echo $cognome;
-$nascita = $_POST["nascita"];
-echo $nascita;
-$sesso = $_POST["sesso"];
-echo $sesso;
-$oldpassword = $_POST["oldpassword"];
-echo $oldpassword;
-$newpassword = $_POST["newpassword"];
-echo $newpassword;
-
-
-?>
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="it">
 
@@ -38,7 +20,13 @@ echo $newpassword;
             <li class="last">Esito invio form</li>
         </ol>
         <div class="thank-you-message">
-            <p class="text-center text-bold">Il tuo form è stato inviato con successo!</p>
+            <?php
+            if (isset($_POST["nome"]) && $_POST["nome"] != "" && isset($_POST["cognome"]) && $_POST["cognome"] != "" && isset($_POST["email"]) && $_POST["email"] != "" && isset($_POST["messaggio"]) && $_POST["messaggio"] != "") {
+                echo '<p class="text-center text-bold">Il tuo form è stato inviato con successo!</p>';
+            } else {
+                echo '<p class="error text-center text-bold">Si è verificato un errore. Riprovare!</p>';
+            }
+            ?>
         </div>
     </main>
     <?php include("includes/template_footer.php") ?>
