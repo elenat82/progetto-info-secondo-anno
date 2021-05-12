@@ -80,68 +80,85 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td class="n-ordine text-center">JHAMHWDZI</td>
-                            <td class="data-ordine text-center">26/07/2018</td>
-                            <td class="total-price primary-color text-center text-bold">3700,00</td>
-                            <td class="metodo-pagamento text-center"><span class="paypal"><span class="fab fa-paypal primary-color" aria-hidden="true"></span> PayPal</span></td>
-                            <td class="stato-ordine text-center"><span class="evaso">Evaso</span></td>
-                            <td class="text-center"><a href="fattura-JHAMHWDZI.pdf" title="Visualizza la fattura"><span class="fas fa-file-download" aria-hidden="true"></span></a></td>
-                            <td class="text-center"><a href="dettaglio.php" title="Visualizza il dettaglio">+ info</a></td>
-                        </tr>
-                        <tr>
-                            <td class="n-ordine text-center">UDKQVHHQR</td>
-                            <td class="data-ordine text-center">13/11/2020</td>
-                            <td class="total-price primary-color text-center text-bold">2400,00</td>
-                            <td class="metodo-pagamento text-center"><span class="credit-card"><span class="far fa-credit-card primary-color" aria-hidden="true"></span> Carta</span></td>
-                            <td class="stato-ordine text-center"><span class="in-lavorazione">In lavorazione</span></td>
-                            <td class="text-center"><a href="fattura-UDKQVHHQR.pdf" title="Visualizza la fattura"><span class="fas fa-file-download" aria-hidden="true"></span></a></td>
-                            <td class="text-center"><a href="dettaglio.php" title="Visualizza il dettaglio">+ info</a></td>
-                        </tr>
+                    <?php  
+                        include("includes/utils.php");
+                        $query_ordini = 'SELECT * FROM ordini o JOIN stati_ordine s ON o.id_stato_ord = s.id_stato_ordine JOIN metodipagamento m ON m.id_metodo_pag = o.tipo_pag_ord WHERE o.id_utente = "' . $_SESSION["email"] . '"';
+                        $risultato_ordini = mysqli_query($connTeQ, $query_ordini); 
+                        $num_righe_ordini = mysqli_num_rows($risultato_ordini);
+                        if ($num_righe_ordini == 0) {
+                            echo '<tr>';
+                                echo '<td colspan="7" class="text-center">Nessun ordine</td>';
+                            echo '</tr>';
+                        } else {
+                            while ($riga = mysqli_fetch_assoc($risultato_ordini)) {
+                                echo '<tr>';
+                                    echo '<td class="n-ordine text-center">'.$riga["numero_ordine"].'</td>';
+                                    echo '<td class="data-ordine text-center">'.$riga["data_ordine"].'</td>';
+                                    echo '<td class="total-price primary-color text-center text-bold">'.$riga["totale_ordine"].'</td>';
+                                    echo '<td class="metodo-pagamento text-center"><span class="'.$riga["nome_metodo_pag"].'"><span class="'.$riga["icona_metodo_pag"].' primary-color" aria-hidden="true"></span> '.$riga["nome_metodo_pag"].'</span></td>';
+                                    echo '<td class="stato-ordine text-center"><span class="'.$riga["nome_stato_ordine"].'">'.ucfirst($riga["nome_stato_ordine"]).'</span></td>';
+                                    echo '<td class="text-center"><a href="fattura-'.$riga["numero_ordine"].'.pdf" title="Visualizza la fattura"><span class="fas fa-file-download" aria-hidden="true"></span></a></td>';
+                                    echo '<td class="text-center"><a href="dettaglio.php" title="Visualizza il dettaglio">+ info</a></td>';
+                                echo '</tr>';
+                            }
+                        }                    
+                    ?>
                     </tbody>
                 </table>
             </section>
             <section>
                 <h3>Indirizzi</h3>
                 <ul id="indirizzi">
-                    <li>
-                        <p class="tipo fatturazione">Fatturazione:</p>
-                        <p><strong class="primary-color text-bold">Mario Rossi</strong></p>
-                        <p class="indirizzo">via Roma, 1 <br>10100 Torino (TO) <br>Italia</p>
-                        <p class="telefono">349-5730286</p>
-                        <p><a href="#" title="Modifica l'indirizzo di fatturazione">Modifica</a></p>
-                    </li>
-                    <li>
-                        <p class="tipo spedizione">Spedizione:</p>
-                        <p><strong class="primary-color text-bold">Mario Rossi</strong></p>
-                        <p class="indirizzo">via Garibaldi, 100 <br>10100 Torino (TO) <br>Italia</p>
-                        <p class="telefono">011-583017</p>
-                        <p><a href="#" title="Modifica l'indirizzo di spedizione">Modifica</a></p>
-                    </li>
-                    <li>
-                        <p class="tipo altro">Altro:</p>
-                        <p><strong class="primary-color text-bold">Mario Rossi c/o Azienda s.r.l.</strong></p>
-                        <p class="indirizzo">piazza Castello, 10 <br>10100 Torino (TO) <br>Italia</p>
-                        <p class="telefono">011-895436</p>
-                        <p><a href="#" title="Modifica l'indirizzo altro">Modifica</a></p>
-                    </li>
+                    <?php  
+                        $query_indirizzi = 'SELECT * FROM indirizzi WHERE id_utente = "' . $_SESSION["email"] . '"';
+                        $risultato_indirizzi = mysqli_query($connTeQ, $query_indirizzi);
+                        $num_righe_indirizzi = mysqli_num_rows($risultato_indirizzi);
+                        if ($num_righe_indirizzi == 0) {
+                            echo '<li>';
+                                echo '<p class="indirizzo"><a href="#" title="Aggiungi un indirizzo">Aggiungi un indirizzo</a></p>';
+                            echo '</li>';
+                        } else {
+                            while ($riga = mysqli_fetch_assoc($risultato_indirizzi)) {
+                                if ($riga["tipo_indirizzo"] == "f") {
+                                    $tipo_ind = "fatturazione";
+                                }
+                                else if ($riga["tipo_indirizzo"] == "s") {
+                                    $tipo_ind = "spedizione";
+                                }
+                                else {
+                                    $tipo_ind = "altro";
+                                }
+                                echo '<li>';
+                                    echo '<p class="tipo '.$tipo_ind.'">'.ucfirst($tipo_ind).':</p>';
+                                    echo '<p><strong class="primary-color text-bold">'.$riga["nome_indirizzo"].'</strong></p>';
+                                    echo '<p class="indirizzo">'.$riga["via"].', '.$riga["civico"].' <br>'.$riga["cap"].' '.$riga["comune"].' ('.$riga["provincia"].') <br>'.$riga["stato_indirizzo"].'</p>';
+                                    echo '<p class="telefono">'.$riga["telefono"].'</p>';
+                                    echo '<p><a href="#" title="Modifica l\'indirizzo di '.$tipo_ind.'">Modifica</a></p>';
+                                echo '</li>';
+                            }
+                        }                    
+                    ?>
                 </ul>
             </section>
             <section>
                 <h3>Wishlist</h3>
-                <details>
-                    <summary class="primary-color">Lista nozze</summary>
-                    <ul class="wishlist">
-                        <li><h3><a href="#" title="Vai al prodotto">Gustav Klimt - La vergine</a></h3></li>
-                    </ul>
-                </details>
-                <details>
-                    <summary class="primary-color">Casa al mare</summary>
-                    <ul  class="wishlist">
-                        <li><h3><a href="#" title="Vai al prodotto">Vincent Van Gogh - Mandorlo fiorito</a></h3></li>
-                    </ul>
-                </details>
-    
+                <?php  
+                        $query_wishlist = 'SELECT * FROM wishlist w JOIN quadri q ON w.sku_quadro = q.sku WHERE id_utente = "' . $_SESSION["email"] . '"';
+                        $risultato_wishlist = mysqli_query($connTeQ, $query_wishlist);
+                        $num_righe_wishlist = mysqli_num_rows($risultato_wishlist);
+                        if ($num_righe_wishlist == 0) {
+                            echo '<p class="wishlist"><a href="#" title="Aggiungi una wishlist">Aggiungi una wishlist</a></p>';
+                        } else {
+                            while ($riga = mysqli_fetch_assoc($risultato_wishlist)) {
+                                echo '<details>';
+                                    echo '<summary class="primary-color">'.$riga["nome_wishlist"].'</summary>';
+                                    echo '<ul class="wishlist">';
+                                        echo '<li><h3><a href="#" title="Vai al prodotto">'.$riga["titolo"].'</a></h3></li>';
+                                    echo '</ul>';
+                                echo '</details>'; 
+                            }
+                        }                    
+                    ?>
             </section>
             <section>
             <ul id="user-menu-2">

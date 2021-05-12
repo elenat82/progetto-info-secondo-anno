@@ -31,8 +31,8 @@
                 echo '<li><a href="#" title="Nessuno stile trovato" class="text-bold">Nessuno stile trovato</a></li>';
             } else {
                 foreach ($risultato as $riga) {
-                    $no_spaces = str_replace(" ", "", $riga['nome']);
-                    echo '<li class="' . $no_spaces . '"><a href="' . $no_spaces . '.php" title="Vai alla pagina ' . $riga["nome"] . '" class="text-bold">' . strtoupper($riga["nome"]) . '</a></li>';
+                    $no_spaces = str_replace(" ", "", $riga['nome_stile']);
+                    echo '<li class="' . $no_spaces . '"><a href="' . $no_spaces . '.php" title="Vai alla pagina ' . $riga["nome_stile"] . '" class="text-bold">' . strtoupper($riga["nome_stile"]) . '</a></li>';
                 }
             }
             ?>
@@ -41,14 +41,14 @@
         <h2 class="primary-color">I nostri artisti</h2>
         <ul id="artisti">
         <?php
-            $query_artisti = "SELECT * FROM artisti";
+            $query_artisti = "SELECT * FROM artisti ORDER BY rand() LIMIT 3";
             $risultato = mysqli_query($connTeQ, $query_artisti);
             $num_righe = mysqli_num_rows($risultato);
             if ($num_righe == 0) {
                 echo '<li><a href="#" title="Nessun artista trovato" class="text-bold">Nessun artista trovato</a></li>';
             } else {
                 foreach ($risultato as $riga) {
-                    echo '<li class="'.strtolower($riga["cognome"]).'"><a href="#" title="Vai alla pagina di '.$riga["nome"].' '.$riga["cognome"].' " class="text-bold">'.$riga["nome"].' '.$riga["cognome"].'</a></li>';
+                    echo '<li class="'.strtolower($riga["cognome_artista"]).'"><a href="#" title="Vai alla pagina di '.$riga["nome_artista"].' '.$riga["cognome_artista"].' " class="text-bold">'.$riga["nome_artista"].' '.$riga["cognome_artista"].'</a></li>';
                 }
             }
             mysqli_close($connTeQ);

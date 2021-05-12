@@ -30,6 +30,7 @@
                 <input type="email" id="email" name="email" placeholder="Inserisci la tua email" required maxlength="50">
                 <label for="messaggio">Messaggio <span>*</span></label>
                 <textarea id="messaggio" name="messaggio" placeholder="Inserisci il tuo messaggio" rows="5" required></textarea>
+                <input type="hidden" id="hidden" name="hidden" value="contatti">
                 <button type="submit" class="primary-background secondary-color-light text-bold">INVIA</button>
             </form>
         </div>

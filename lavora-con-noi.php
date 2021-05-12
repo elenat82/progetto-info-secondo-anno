@@ -52,6 +52,7 @@
                 <label for="descrizione">Parlaci un po' di te</label>
                 <textarea name="descrizione" id="descrizione" rows="5" placeholder="Scrivi qualcosa su di te"></textarea>
             </div>
+            <input type="hidden" id="hidden" name="hidden" value="lavora-con-noi">
             <div class="form-buttons">
                 <button type="submit" class="primary-background secondary-color-light text-bold">INVIA</button>
             </div>

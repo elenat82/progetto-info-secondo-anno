@@ -424,13 +424,13 @@ blockquote {
 #categorie .naif {
     background-image: url("../img/medie/Louis_Vivin_Jungle.jpg");
 }
-#artisti .monetti {
+#artisti li:nth-child(1) {
     background-image: linear-gradient(to right, #5d26c1, #a17fe0, #59c173);
 }
-#artisti .goghi {
+#artisti li:nth-child(2) {
     background-image: linear-gradient(to right, #f11712, #0099f7)
 }
-#artisti .picassi {
+#artisti li:nth-child(3) {
     background-image: linear-gradient( to right,  #be0bd7, #f6ea0b);
 }
 /* ------- PAGINA CARRELLO --------- */

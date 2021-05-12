@@ -34,6 +34,11 @@ $activePage = basename($_SERVER['PHP_SELF'], ".php");
             <li><a href="#" title="Vai alla pagina Artisti" accesskey="a" class="primary-color text-bold <?php if ($activePage == 'artisti') {echo 'menu-active';} ?>">ARTISTI</a></li>
             <li><a href="contatti.php" title="Vai alla pagina Contatti" accesskey="c" class="primary-color text-bold <?php if ($activePage == 'contatti') {echo 'menu-active';} ?>">CONTATTI</a></li>
             <li><a href="lavora-con-noi.php" title="Vai alla pagina Lavora con noi" accesskey="l" class="primary-color text-bold <?php if ($activePage == 'lavora-con-noi') {echo 'menu-active';} ?>">LAVORA CON NOI</a></li>
+            <?php  
+                if ($_SESSION["ruolo"] == 'a') {
+                    echo '<li><a href="amministrazione.php" title="Vai alla pagina Amministrazione" accesskey="z" class="primary-color text-bold"><span class="fas fa-cogs fa-spin"></span> AMMINISTRAZIONE</a></li>';
+                }
+            ?>
             <li><a href="ricerca.php" title="Vai alla pagina Ricerca" accesskey="r" class="secondary-background-dark text-bold">Partecipa alla ricerca!</a></li>
         </ul>
     </nav>

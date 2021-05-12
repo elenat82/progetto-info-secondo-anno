@@ -21,11 +21,24 @@
         </ol>
         <div class="thank-you-message">
             <?php
-            if (isset($_POST["nome"]) && $_POST["nome"] != "" && isset($_POST["cognome"]) && $_POST["cognome"] != "" && isset($_POST["email"]) && $_POST["email"] != "" && isset($_POST["messaggio"]) && $_POST["messaggio"] != "") {
-                echo '<p class="text-center text-bold">Il tuo form è stato inviato con successo!</p>';
-            } else {
-                echo '<p class="error text-center text-bold">Si è verificato un errore. Riprovare!</p>';
+            if (isset($_POST["hidden"]) && $_POST["hidden"] == "contatti") {
+                if (isset($_POST["nome"]) && $_POST["nome"] != "" && isset($_POST["cognome"]) && $_POST["cognome"] != "" && isset($_POST["email"]) && $_POST["email"] != "" && isset($_POST["messaggio"]) && $_POST["messaggio"] != "") {
+                    echo '<pre class="text-center text-bold">Il tuo form è stato inviato con successo!</pre>';
+                } else {
+                    echo '<p class="error text-center text-bold">Si è verificato un errore. Riprovare!</p>';
+                }
             }
+            else if (isset($_POST["hidden"]) && $_POST["hidden"] == "lavora-con-noi") {
+                if (isset($_POST["nome"]) && $_POST["nome"] != "" && isset($_POST["cognome"]) && $_POST["cognome"] != "" && isset($_POST["nascita"]) && $_POST["nascita"] != "" && isset($_POST["email"]) && $_POST["email"] != "" && isset($_POST["telefono"]) && $_POST["telefono"] != "" && isset($_POST["cv"]) && $_POST["cv"] != "") {
+                    echo '<pre class="text-center text-bold">Il tuo form è stato inviato con successo!</pre>';
+                } else {
+                    echo '<p class="error text-center text-bold">Si è verificato un errore. Riprovare!</p>';
+                }
+            }
+            else {
+                echo '<p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>';
+            }
+
             ?>
         </div>
     </main>

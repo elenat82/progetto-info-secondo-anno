@@ -91,7 +91,7 @@
                         $risultato_controllo = mysqli_query($connTeQ, $query_utente_controllo);
                         $num_righe_controllo = mysqli_num_rows($risultato_controllo);
                         if ($num_righe_controllo == 0) {
-                            $query_registrazione = "INSERT INTO utenti (email, nome, cognome, password, datanascita, sesso, ruolo) VALUES ('" . $_POST["email-registrati"] . "','" . $_POST["nome"] . "','" . $_POST["cognome"] . "', '" . $_POST["password-registrati"] . "', '" . $_POST["nascita"] . "', '" . $_POST["sesso"] . "', 'u')";
+                            $query_registrazione = "INSERT INTO utenti (email, nome_utente, cognome_utente, password, datanascita, sesso, ruolo) VALUES ('" . $_POST["email-registrati"] . "','" . $_POST["nome"] . "','" . $_POST["cognome"] . "', '" . $_POST["password-registrati"] . "', '" . $_POST["nascita"] . "', '" . $_POST["sesso"] . "', 'u')";
                             $risultato_registrazione = mysqli_query($connTeQ, $query_registrazione);
                             //For successful SELECT, SHOW, DESCRIBE or EXPLAIN queries, mysqli_query() will return a mysqli_result object. For other successful queries mysqli_query() will return TRUE. Returns FALSE on failure.
                             if ($risultato_registrazione) {
