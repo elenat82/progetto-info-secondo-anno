@@ -18,12 +18,8 @@
         <?php
         include("includes/utils.php");
         $query_quadro = 'SELECT * FROM quadri WHERE sku = "' . $_GET['sku'] .'"';
-        print_r($query_quadro);
         $risultato_quadri = mysqli_query($connTeQ, $query_quadro);
         while ($riga = mysqli_fetch_array($risultato_quadri, MYSQLI_ASSOC)) {
-            echo '<pre>';
-            print_r($riga);
-            echo '</pre>';
             $sku = $riga["sku"];
             $titolo = $riga["titolo"];
             $prezzo = $riga["prezzo"];

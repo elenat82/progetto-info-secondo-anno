@@ -19,8 +19,26 @@
             <li><a href="index.php" title="Vai alla Home" class="text-bold">Home</a></li>
             <li class="last">Amministrazione</li>
         </ol>
-        <h2>Amministrazione</h2>
-        tabella con dentro campi form
+        <div id="pagina-amministrazione">
+            <h2>Amministrazione</h2>
+            <ul>
+                <li>
+                    <a href="admin-artisti.php"><span class="fas fa-chalkboard-teacher"></span> Artisti</a>
+                </li>
+                <li>
+                    <a href="admin-metodi-pag.php"><span class="fas fa-cash-register"></span> Pagamenti</a>
+                </li>
+                <li>
+                    <a href="admin-quadri.php"><span class="fas fa-palette"></span> Quadri</a>
+                </li>
+                <li>
+                    <a href="admin-stili.php"><span class="fas fa-brush"></span> Stili</a>
+                </li>
+                <li>
+                    <a href="admin-utenti.php"><span class="fas fa-users"></span> Utenti</a>
+                </li>
+            </ul>
+        </div>
     </main>
     <?php include("includes/template_footer.php") ?>
 </body>
