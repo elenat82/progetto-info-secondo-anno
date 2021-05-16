@@ -31,8 +31,8 @@
                 echo '<li><a href="#" title="Nessuno stile trovato" class="text-bold">Nessuno stile trovato</a></li>';
             } else {
                 foreach ($risultato as $riga) {
-                    $no_spaces = str_replace(" ", "", $riga['nome_stile']);
-                    echo '<li class="' . $no_spaces . '"><a href="' . $no_spaces . '.php" title="Vai alla pagina ' . $riga["nome_stile"] . '" class="text-bold">' . strtoupper($riga["nome_stile"]) . '</a></li>';
+                    $no_spaces = str_replace(" ", "-", $riga['nome_stile']);
+                    echo '<li class="' . $no_spaces . '"><a href="stile.php?id=' . $riga["id_stile"] . '" title="Vai alla pagina ' . ucfirst($riga["nome_stile"]) . '" class="text-bold">' . strtoupper($riga["nome_stile"]) . '</a></li>';
                 }
             }
             ?>

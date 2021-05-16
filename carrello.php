@@ -28,7 +28,7 @@
         <table id="carrello">
             <thead>
                 <tr>
-                    <th class="text-bold text-center">PRODOTTO</th>
+                    <th class="text-bold text-center">QUADRO</th>
                     <th class="text-bold text-center">DESCRIZIONE</th>
                     <th class="text-bold text-center">PREZZO UNITARIO</th>
                     <th class="text-bold text-center">QUANTITA'</th>
@@ -36,97 +36,73 @@
                 </tr>
             </thead>
             <tbody>
-                <tr id="prodotto-CM05">
-                    <td class="thumb text-center"><a href="#" title="Vai al prodotto Claud Monet - Regate ad Argenteuil"><img src="img/thumbs/Claude_Monet_Regate_ad_Argenteuil-thumb.jpg"
-                            alt="Claud Monet - Regate ad Argenteuil"></a></td>
-                    <td>
-                        <h3><a href="#" title="Vai al prodotto Claude Monet - Regate ad Argenteuil">Claude Monet - Regate ad Argenteuil</a></h3>
-                        <p><span>SKU: </span><span>CM05</span></p>
-                    </td>
-                    <td class="prices text-center">
-                        <p class="originale scontato"><span>980,00</span> <span class="sconto">- 20%</span></p>
-                        <p class="finale">784,00</p>
-                    </td>
-                    <td><label for="quantita-CM05">N. </label><input type="number" name="quantita-CM05" id="quantita-CM05" value="1" min="1" max="5"><a
-                            href="#" title="Rimuovi prodotto"><span class="fas fa-trash-alt" aria-hidden="true"></span></a></td>
-                    <td class="total-price primary-color text-bold">784,00</td>
-                </tr>
-                <tr id="prodotto-PP01">
-                    <td class="thumb text-center"><a href="#" title="Vai al prodotto Pablo Picasso - Guernica"><img src="img/thumbs/Pablo_Picasso_Guernica-thumb.jpg"
-                            alt="Pablo Picasso - Guernica"></a></td>
-                    <td>
-                        <h3><a href="#" title="Vai al prodotto Pablo Picasso - Guernica">Pablo Picasso - Guernica</a></h3>
-                        <p><span>SKU: </span><span>PP01</span></p>
-                    </td>
-                    <td class="prices text-center">
-                        <p class="originale scontato"><span>1240,00</span> <span class="sconto">- 20%</span></p>
-                        <p class="finale">992,00</p>
-                    </td>
-                    <td><label for="quantita-PP01">N. </label><input type="number" name="quantita-PP01" id="quantita-PP01" value="1" min="1" max="5"><a
-                            href="#" title="Rimuovi prodotto"><span class="fas fa-trash-alt" aria-hidden="true"></span></a></td>
-                    <td class="total-price primary-color text-bold">992,00</td>
-                </tr>
-                <tr id="prodotto-PR04">
-                    <td class="thumb text-center"><a href="#" title="Vai al prodotto Pierre Auguste Renoir - Le bagnanti"><img src="img/thumbs/Pierre-Auguste_Renoir_Le_Bagnanti-thumb.jpg"
-                            alt="Pierre Auguste Renoir - Le bagnanti"></a></td>
-                    <td>
-                        <h3><a href="#" title="Vai al prodotto Pierre Auguste Renoir - Le bagnanti">Pierre Auguste Renoir - Le bagnanti</a></h3>
-                        <p><span>SKU: </span><span>PR04</span></p>
-                    </td>
-                    <td class="prices text-center">
-                        <p class="originale"><span>850,00</span></p>
-                        <p class="finale"></p>
-                    </td>
-                    <td><label for="quantita-PR04">N. </label><input type="number" name="quantita-PR04" id="quantita-PR04" value="1" min="1" max="5"><a
-                            href="#" title="Rimuovi prodotto"><span class="fas fa-trash-alt" aria-hidden="true"></span></a></td>
-                    <td  class="total-price primary-color text-bold">850,00</td>
-                </tr>
-                <tr id="prodotto-VK06">
-                    <td class="thumb text-center"><a href="#" title="Vai al prodotto Vassili Kandinski - Giallo rosso e blu"><img src="img/thumbs/Vassili_Kandinsky_Jaune_Rouge_Bleu-thumb.jpg"
-                            alt="Vassili Kandinski - Giallo rosso e blu"></a></td>
-                    <td>
-                        <h3><a href="#" title="Vai al prodotto Vassili Kandinski - Giallo rosso e blu">Vassili Kandinski - Giallo rosso e blu</a></h3>
-                        <p><span>SKU: </span><span>VK06</span></p>
-                    </td>
-                    <td class="prices text-center">
-                        <p class="originale scontato"><span>930,00</span> <span class="sconto">- 20%</span></p>
-                        <p class="finale">744,00</p>
-                    </td>
-                    <td><label for="quantita-VK06">N. </label><input type="number" name="quantita-VK06" id="quantita-VK06" value="1" min="1" max="5"><a
-                            href="#" title="Rimuovi prodotto"><span class="fas fa-trash-alt" aria-hidden="true"></span></a></td>
-                    <td class="total-price primary-color text-bold">744,00</td>
-                </tr>
-                <tr id="prodotto-VV09">
-                    <td class="thumb text-center"><a href="#" title="Vai al prodotto Vincent Van Gogh - Campo di Grano"><img src="img/thumbs/Vincent_Van_Gogh_Campo_di_grano-thumb.jpg"
-                            alt="Vincent Van Gogh - Campo di Grano"></a></td>
-                    <td>
-                        <h3><a href="#" title="Vai al prodotto Vincent Van Gogh - Campo di Grano">Vincent Van Gogh - Campo di Grano</a></h3>
-                        <p><span>SKU: </span><span>VV09</span></p>
-                    </td>
-                    <td class="prices text-center">
-                        <p class="originale">1460,00</p>
-                        <p class="finale"></p>
-                    </td>
-                    <td><label for="quantita-VV09">N. </label><input type="number" name="quantita-VV09" id="quantita-VV09" value="1" min="1" max="5"><a
-                            href="#" title="Rimuovi prodotto"><span class="fas fa-trash-alt" aria-hidden="true"></span></a></td>
-                    <td class="total-price primary-color text-bold">1460,00</td>
-                </tr>
+                <?php
+                include("includes/utils.php");
+                //se non viene passato il parametro vuol dire che sono andata nella pagina 
+                //del carrello solo per visualizzarlo
+                if (isset($_GET["id"]) && $_GET["id"] != "") {
+                    if (isset($_SESSION["carrello"])) {
+                        //se non c'è già lo metto nel carrello
+                        if (!in_array($_GET["id"], $_SESSION["carrello"])) {
+                            //oppure usare array_push($arr, $el)
+                            $_SESSION["carrello"][] = $_GET["id"];
+                        }
+                    } else {
+                        $_SESSION["carrello"] = [];
+                        $_SESSION["carrello"][] = $_GET["id"];
+                    }
+                }
+                //https://stackoverflow.com/questions/6102398/php-implode-101-with-quotes
+                $query_quadri = 'SELECT * FROM quadri WHERE sku in ("' . implode('","', isset($_SESSION["carrello"]) ? $_SESSION["carrello"] : []) . '");';
+                $risultato_quadri = mysqli_query($connTeQ, $query_quadri);
+                $num_righe_quadri = mysqli_num_rows($risultato_quadri);
+                $totale_carrello = 0;
+                if ($num_righe_quadri == 0) {
+                    echo '<tr><td colspan="5"><p class="text-center">Nessun quadro nel carrello</p></td></tr>';
+                } else {
+                    while ($riga = mysqli_fetch_assoc($risultato_quadri)) {
+                        //https://www.php.net/manual/en/function.file-exists.php
+                        if (file_exists("img/thumbs/" . $riga["immagine"])) {
+                            $path = "img/thumbs/" . $riga["immagine"];
+                        } else {
+                            $path = "https://placekitten.com/150/100";
+                        }
+                ?>
+                        <tr id="quadro-<?php echo $riga["sku"]; ?>">
+                            <td class="thumb text-center"><a href="quadro.php?id=<?php echo $riga["sku"]; ?>" title="Vai al quadro <?php echo $riga["titolo"]; ?>"><img src="<?php echo $path; ?>" alt="<?php echo $riga["titolo"]; ?>"></a></td>
+                            <td>
+                                <h3><a href="quadro.php?sku=<?php echo $riga["sku"]; ?>" title="Vai al quadro <?php echo $riga["titolo"]; ?>"><?php echo $riga["titolo"]; ?></a></h3>
+                                <p><span>SKU: </span><span><?php echo $riga["sku"]; ?></span></p>
+                            </td>
+                            <td class="prices text-center">
+                                <p class="originale <?php if ($riga["sconto"]) echo 'scontato'; ?>"><span><?php echo number_format($riga["prezzo"], 2); ?>&euro;</span> <?php if ($riga["sconto"]) echo '<span class="sconto">- ' . $riga["sconto"] . '%</span>'; ?></p>
+                                <?php if ($riga["finale"])  echo '<p class="finale">' . $riga["finale"] . '&euro;</p>'; ?>
+                            </td>
+                            <td><label for="quantita-<?php echo $riga["sku"]; ?>">N. </label><input type="number" name="quantita-<?php echo $riga["sku"]; ?>" id="quantita-<?php echo $riga["sku"]; ?>" value="1" min="1" max="5"><a href="aggiorna-carrello.php?sku=<?php echo $riga["sku"]; ?>" title="Rimuovi quadro"><span class="fas fa-trash-alt" aria-hidden="true"></span></a></td>
+                            <!-- https://www.php.net/manual/en/language.operators.comparison.php#language.operators.comparison.ternary -->
+                            <td class="total-price primary-color text-bold"><?php echo $riga["finale"] ? $riga["finale"] : number_format($riga["prezzo"], 2); ?>&euro;</td>
+                        </tr>
+                <?php
+                        $totale_carrello += $riga["finale"] ? $riga["finale"] : $riga["prezzo"];
+                    }
+                }
+                ?>
             </tbody>
             <tfoot>
                 <tr>
                     <td colspan="3"></td>
                     <td class="text-right">Totale prodotti (iva incl.)</td>
-                    <td class="text-right">4830,00</td>
+                    <td class="text-right"><?php echo number_format($totale_carrello, 2); ?></td>
                 </tr>
                 <tr>
                     <td colspan="3"></td>
                     <td class="text-right">Totale spedizione</td>
-                    <td class="text-right">80,00</td>
+                    <td class="text-right">80.00</td>
                 </tr>
                 <tr>
                     <td colspan="3"></td>
                     <td class="text-right">Totale</td>
-                    <td class="text-right total-price primary-color secondary-background-light text-bold"><strong>4910,00</strong> <span class="fas fa-euro-sign" aria-hidden="true"></span></td>
+                    <td class="text-right total-price primary-color secondary-background-light text-bold"><strong><?php echo number_format($totale_carrello + 80, 2); ?></strong> &euro;</span></td>
                 </tr>
             </tfoot>
         </table>

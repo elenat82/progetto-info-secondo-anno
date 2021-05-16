@@ -415,7 +415,7 @@ blockquote {
 #categorie .iperrealismo {
     background-image: url("../img/medie/Mauro_David_Fruttiera_di_cristallo_con_meloni.jpg");
 }
-#categorie .popart {
+#categorie .pop-art {
     background-image: url("../img/medie/Andy_Warhol_Marilyn.jpg");
 }
 #categorie .surrealismo {
@@ -506,11 +506,11 @@ blockquote {
     width: 100px;
 }
 #carrello .prices .scontato span:nth-child(1),
-#pagina-prodotto .prices .scontato span:nth-child(1) {
+#pagina-quadro .prices .scontato span:nth-child(1) {
     text-decoration: line-through;
 }
 #carrello .prices .scontato .sconto,
-#pagina-prodotto .prices .scontato .sconto {
+#pagina-quadro .prices .scontato .sconto {
     vertical-align: super;
     font-style: italic;
 }
@@ -567,12 +567,12 @@ details .wishlist a {
     padding-top: 0.5rem;
     text-decoration: none;
 }
-/* ------------ PAGINA IMPRESSIONISMO -------- */
-#impressionismo {
+/* ------------ PAGINA STILE -------- */
+#stile {
     margin-top: 2rem;
     margin-bottom: 2rem;
 }
-#impressionismo li {
+#stile li {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -580,41 +580,41 @@ details .wishlist a {
     padding: 1rem;
     width: 100%;
 }
-#impressionismo li:nth-child(even) {
+#stile li:nth-child(even) {
     background-color: white;
 }
-#impressionismo li:nth-child(odd) {
+#stile li:nth-child(odd) {
     background-color: #e8e8ed;
 }
-#impressionismo .descrizione {
+#stile .descrizione {
     width: 100%;
     height: 300px;
 }
-#impressionismo .descrizione a {
+#stile .descrizione a {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     height: 100%;
     text-decoration: none;
 }
-#impressionismo .mappa-sx .descrizione a{
+#stile .mappa-sx .descrizione a{
     align-items: flex-end;
 }
-#impressionismo .mappa-dx .descrizione a{
+#stile .mappa-dx .descrizione a{
     align-items: flex-start;
 }
-#impressionismo .fa-long-arrow-alt-right,
-#impressionismo .fa-long-arrow-alt-left {
+#stile .fa-long-arrow-alt-right,
+#stile .fa-long-arrow-alt-left {
     margin-right: 1rem;
     margin-left: 1rem;
 }
-/* ------------ PAGINA PRODOTTO ---------- */
-#pagina-prodotto,
+/* ------------ PAGINA QUADRO ---------- */
+#pagina-quadro,
 #pagina-accedi {
     display: flex;
     flex-wrap: wrap;
 }
-#pagina-prodotto .half,
+#pagina-quadro .half,
 #pagina-accedi .half{
     width: 50%;
     flex-grow: 1;
@@ -623,14 +623,14 @@ details .wishlist a {
     /* vh significa viewport height, 1vh è 1/100 dell'altezza della finestra */
     height: 100vh;
 }
-#pagina-prodotto .left {
+#pagina-quadro .left {
     position: relative;
     overflow: hidden;
 }
-#pagina-prodotto .left img {
+#pagina-quadro .left img {
     height: 100%;
 }
-#pagina-prodotto .left .img-big {
+#pagina-quadro .left .img-big {
     position: absolute;
     left: 0%;
     top: 00%;
@@ -645,16 +645,16 @@ details .wishlist a {
     opacity: 0;
     transition: opacity linear 0.5s;
 }
-#pagina-prodotto .left .img-big button {
+#pagina-quadro .left .img-big button {
     font-size: 2rem;
     color: white;
 }
-#pagina-prodotto .left:hover .img-big {
+#pagina-quadro .left:hover .img-big {
     opacity: 1;
     /* proprietà da animare, velocità dell'animazione e durata */
     transition: opacity linear 0.5s;
 }
-#pagina-prodotto .dettagli {
+#pagina-quadro .dettagli {
     display: flex;
     /* specifica che gli elementi si devono disporre sull'asse verticale*/
     flex-direction: column;
@@ -662,46 +662,46 @@ details .wishlist a {
     justify-content: space-between;
 }
 /*  con il selettore > si selezionano solo gli elementi direttamente discendenti */
-#pagina-prodotto .dettagli > * {
+#pagina-quadro .dettagli > * {
     padding: 2rem;
 }
 /* -------- HO DOVUTO FARE QUESTO PERCHE' IL VALIDATORE DELL'ACCESSIBILITA' NON MI FACEVA METTERE L'H3 PRIMA DELL'H2 ------- */
-#pagina-prodotto .dettagli .autore-titolo {
+#pagina-quadro .dettagli .autore-titolo {
     display: flex;
     flex-direction: column-reverse;
 }
-#pagina-prodotto .dettagli .autore-titolo a {
+#pagina-quadro .dettagli .autore-titolo a {
     text-decoration: none;
 }
-#pagina-prodotto .dettagli .rating .fas.fa-star {
+#pagina-quadro .dettagli .rating .fas.fa-star {
     color: gold;
     text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
 }
-#pagina-prodotto .dettagli .prices {
+#pagina-quadro .dettagli .prices {
     display: flex;
     align-items: center;
 }
-#pagina-prodotto .dettagli .prices > p {
+#pagina-quadro .dettagli .prices > p {
     margin-right: 1rem;
 }
-#pagina-prodotto .dettagli #cta a,
-#pagina-prodotto .dettagli #wishlist a {
+#pagina-quadro .dettagli #cta a,
+#pagina-quadro .dettagli #wishlist a {
     display: block;
     padding: 0.7rem 1.2rem;
     margin-bottom: 1rem;
     border-radius: 20px;
     text-decoration: none;
 }
-#pagina-prodotto .dettagli #cta a {
+#pagina-quadro .dettagli #cta a {
     color: white;
 }
-#pagina-prodotto .dettagli #wishlist a {
+#pagina-quadro .dettagli #wishlist a {
     border: 1px solid #55536a;
 }
-#pagina-prodotto .dettagli .icons {
+#pagina-quadro .dettagli .icons {
     display: flex;
 }
-#pagina-prodotto .dettagli .icons li {
+#pagina-quadro .dettagli .icons li {
     margin-right: 1rem;
 }
 /* --------------- PAGINA RICERCA -------------------- */
@@ -778,12 +778,12 @@ table.amministrazione {
 
 /* ---------- RESPONSIVE ------------- */
 @media only screen and (max-width: 600px) {
-    #impressionismo .mappa,
-    #impressionismo .descrizione > p {
+    #stile .mappa,
+    #stile .descrizione > p {
       display: none;
     }
-    #impressionismo .mappa-sx .descrizione a,
-    #impressionismo .mappa-dx .descrizione a {
+    #stile .mappa-sx .descrizione a,
+    #stile .mappa-dx .descrizione a {
         align-items: flex-start;
     }
   }

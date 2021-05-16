@@ -1,8 +1,10 @@
 <?php session_start(); ?>
-<?php 
-    if ($_SESSION["loggato"]) {
-        header("location: account.php");
-    }
+<?php
+//se l'utente è già loggato ma prova lo stesso ad accedere alla pagina 
+//lo reindirizzo alla pagina dell'account
+if ($_SESSION["loggato"]) {
+    header("location: account.php");
+}
 ?>
 <!DOCTYPE html>
 <html lang="it">
@@ -47,8 +49,8 @@
                             foreach ($risultato_accedi as $riga) {
                                 $_SESSION["loggato"] = true;
                                 $_SESSION["email"] = $riga["email"];
-                                $_SESSION["cognome"] = $riga["cognome"];
-                                $_SESSION["nome"] = $riga["nome"];
+                                $_SESSION["cognome_utente"] = $riga["cognome_utente"];
+                                $_SESSION["nome_utente"] = $riga["nome_utente"];
                                 $_SESSION["datanascita"] = $riga["datanascita"];
                                 $_SESSION["sesso"] = $riga["sesso"];
                                 $_SESSION["ruolo"] = $riga["ruolo"];

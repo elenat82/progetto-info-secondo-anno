@@ -19,45 +19,41 @@
             <li><a href="index.php" title="Vai alla Home" class="text-bold">Home</a></li>
             <li class="last">Account</li>
         </ol>
-        <h2>Benvenuto, <?php  echo $_SESSION["nome"];?>!</h2>
+        <h2>Benvenuto, <?php echo $_SESSION["nome_utente"]; ?>!</h2>
         <div id="pagina-account">
             <section>
                 <h3>Informazioni personali</h3>
                 <form action="thankyou-page.php" method="post" id="info">
                     <div>
                         <label for="email">E-mail <span>*</span></label>
-                        <input type="email" name="email" id="email" value="<?php  echo $_SESSION["email"];?>"
-                            placeholder="Inserisci il tuo indirizzo e-mail" required maxlength="50">
+                        <input type="email" name="email" id="email" value="<?php echo $_SESSION["email"]; ?>" placeholder="Inserisci il tuo indirizzo e-mail" required maxlength="50">
                     </div>
                     <div>
                         <label for="nome">Nome <span>*</span></label>
-                        <input type="text" name="nome" id="nome" value="<?php  echo $_SESSION["nome"];?>" placeholder="Inserisci il tuo nome" maxlength="50" required>
+                        <input type="text" name="nome_utente" id="nome" value="<?php echo $_SESSION["nome_utente"]; ?>" placeholder="Inserisci il tuo nome" maxlength="50" required>
                         <label for="cognome">Cognome <span>*</span></label>
-                        <input type="text" name="cognome" id="cognome" value="<?php  echo $_SESSION["cognome"];?>" placeholder="Inserisci il tuo cognome" maxlength="50" required>
+                        <input type="text" name="cognome_utente" id="cognome" value="<?php echo $_SESSION["cognome_utente"]; ?>" placeholder="Inserisci il tuo cognome" maxlength="50" required>
                     </div>
                     <div>
                         <label for="nascita">Data di nascita <span>*</span></label>
-                        <input type="date" name="nascita" id="nascita" value="<?php  echo $_SESSION["datanascita"];?>"
-                            required>
+                        <input type="date" name="nascita" id="nascita" value="<?php echo $_SESSION["datanascita"]; ?>">
                     </div>
                     <fieldset>
                         <legend>Sesso <span>*</span></legend>
-                        <input type="radio" id="maschio" name="sesso" value="m" required <?php  if ($_SESSION["sesso"] == "m") echo 'checked'; ?>>
+                        <input type="radio" id="maschio" name="sesso" value="m" <?php if ($_SESSION["sesso"] == "m") echo 'checked'; ?>>
                         <label for="maschio">Maschio</label>
-                        <input type="radio" id="femmina" name="sesso" value="f" required <?php  if ($_SESSION["sesso"] == "f") echo 'checked'; ?>>
+                        <input type="radio" id="femmina" name="sesso" value="f" <?php if ($_SESSION["sesso"] == "f") echo 'checked'; ?>>
                         <label for="femmina">Femmina</label>
-                        <input type="radio" id="altro" name="sesso" value="a" required <?php  if ($_SESSION["sesso"] == "a") echo 'checked'; ?>>
+                        <input type="radio" id="altro" name="sesso" value="a" <?php if ($_SESSION["sesso"] == "a") echo 'checked'; ?>>
                         <label for="altro">Altro</label>
                     </fieldset>
                     <hr>
                     <div>
                         <p class="hint">Se desideri modificare la tua password compila i campi sottostanti:</p>
                         <label for="oldpassword">Password attuale</label>
-                        <input type="password" name="oldpassword" id="oldpassword"
-                            placeholder="Inserisci la tua password corrente" maxlength="50">
+                        <input type="password" name="oldpassword" id="oldpassword" placeholder="Inserisci la tua password corrente" maxlength="50">
                         <label for="newpassword">Nuova password</label>
-                        <input type="password" name="newpassword" id="newpassword"
-                            placeholder="Inserisci la tua nuova password" maxlength="50">
+                        <input type="password" name="newpassword" id="newpassword" placeholder="Inserisci la tua nuova password" maxlength="50">
                     </div>
                     <div class="form-buttons">
                         <button type="reset" class="text-bold">Annulla Modifiche</button>
@@ -80,97 +76,101 @@
                         </tr>
                     </thead>
                     <tbody>
-                    <?php  
+                        <?php
                         include("includes/utils.php");
                         $query_ordini = 'SELECT * FROM ordini o JOIN stati_ordine s ON o.id_stato_ord = s.id_stato_ordine JOIN metodipagamento m ON m.id_metodo_pag = o.tipo_pag_ord WHERE o.id_utente = "' . $_SESSION["email"] . '"';
-                        $risultato_ordini = mysqli_query($connTeQ, $query_ordini); 
+                        $risultato_ordini = mysqli_query($connTeQ, $query_ordini);
                         $num_righe_ordini = mysqli_num_rows($risultato_ordini);
-                        if ($num_righe_ordini == 0) {
-                            echo '<tr>';
-                                echo '<td colspan="7" class="text-center">Nessun ordine</td>';
-                            echo '</tr>';
+                        if ($num_righe_ordini == 0) { ?>
+                            <tr>
+                                <td colspan="7" class="text-center">Nessun ordine</td>
+                            </tr>
+                            <?php
                         } else {
-                            while ($riga = mysqli_fetch_assoc($risultato_ordini)) {
-                                echo '<tr>';
-                                    echo '<td class="n-ordine text-center">'.$riga["numero_ordine"].'</td>';
-                                    echo '<td class="data-ordine text-center">'.$riga["data_ordine"].'</td>';
-                                    echo '<td class="total-price primary-color text-center text-bold">'.$riga["totale_ordine"].'</td>';
-                                    echo '<td class="metodo-pagamento text-center"><span class="'.$riga["nome_metodo_pag"].'"><span class="'.$riga["icona_metodo_pag"].' primary-color" aria-hidden="true"></span> '.$riga["nome_metodo_pag"].'</span></td>';
-                                    echo '<td class="stato-ordine text-center"><span class="'.$riga["nome_stato_ordine"].'">'.ucfirst($riga["nome_stato_ordine"]).'</span></td>';
-                                    echo '<td class="text-center"><a href="fattura-'.$riga["numero_ordine"].'.pdf" title="Visualizza la fattura"><span class="fas fa-file-download" aria-hidden="true"></span></a></td>';
-                                    echo '<td class="text-center"><a href="dettaglio.php" title="Visualizza il dettaglio">+ info</a></td>';
-                                echo '</tr>';
+                            while ($riga = mysqli_fetch_assoc($risultato_ordini)) { ?>
+                                <tr>
+                                    <td class="n-ordine text-center"><?php $riga["numero_ordine"] ?></td>
+                                    <td class="data-ordine text-center"><?php $riga["data_ordine"] ?></td>
+                                    <td class="total-price primary-color text-center text-bold"><?php $riga["totale_ordine"] ?></td>
+                                    <td class="metodo-pagamento text-center"><span class="<?php $riga["nome_metodo_pag"] ?>"><span class="<?php $riga["icona_metodo_pag"] ?> primary-color" aria-hidden="true"></span> <?php $riga["nome_metodo_pag"] ?></span></td>
+                                    <td class="stato-ordine text-center"><span class="<?php $riga["nome_stato_ordine"] ?>"> <?php ucfirst($riga["nome_stato_ordine"]) ?></span></td>
+                                    <td class="text-center"><a href="fattura-<?php $riga["numero_ordine"] ?>.pdf" title="Visualizza la fattura"><span class="fas fa-file-download" aria-hidden="true"></span></a></td>
+                                    <td class="text-center"><a href="dettaglio.php" title="Visualizza il dettaglio">+ info</a></td>
+                                </tr>
+                        <?php
                             }
-                        }                    
-                    ?>
+                        }
+                        ?>
                     </tbody>
                 </table>
             </section>
             <section>
                 <h3>Indirizzi</h3>
                 <ul id="indirizzi">
-                    <?php  
-                        $query_indirizzi = 'SELECT * FROM indirizzi WHERE id_utente = "' . $_SESSION["email"] . '"';
-                        $risultato_indirizzi = mysqli_query($connTeQ, $query_indirizzi);
-                        $num_righe_indirizzi = mysqli_num_rows($risultato_indirizzi);
-                        if ($num_righe_indirizzi == 0) {
-                            echo '<li>';
-                                echo '<p class="indirizzo"><a href="#" title="Aggiungi un indirizzo">Aggiungi un indirizzo</a></p>';
-                            echo '</li>';
-                        } else {
-                            while ($riga = mysqli_fetch_assoc($risultato_indirizzi)) {
-                                if ($riga["tipo_indirizzo"] == "f") {
-                                    $tipo_ind = "fatturazione";
-                                }
-                                else if ($riga["tipo_indirizzo"] == "s") {
-                                    $tipo_ind = "spedizione";
-                                }
-                                else {
-                                    $tipo_ind = "altro";
-                                }
-                                echo '<li>';
-                                    echo '<p class="tipo '.$tipo_ind.'">'.ucfirst($tipo_ind).':</p>';
-                                    echo '<p><strong class="primary-color text-bold">'.$riga["nome_indirizzo"].'</strong></p>';
-                                    echo '<p class="indirizzo">'.$riga["via"].', '.$riga["civico"].' <br>'.$riga["cap"].' '.$riga["comune"].' ('.$riga["provincia"].') <br>'.$riga["stato_indirizzo"].'</p>';
-                                    echo '<p class="telefono">'.$riga["telefono"].'</p>';
-                                    echo '<p><a href="#" title="Modifica l\'indirizzo di '.$tipo_ind.'">Modifica</a></p>';
-                                echo '</li>';
-                            }
-                        }                    
+                    <?php
+                    $query_indirizzi = 'SELECT * FROM indirizzi WHERE id_utente = "' . $_SESSION["email"] . '"';
+                    $risultato_indirizzi = mysqli_query($connTeQ, $query_indirizzi);
+                    $num_righe_indirizzi = mysqli_num_rows($risultato_indirizzi);
+                    if ($num_righe_indirizzi == 0) { ?>
+                        <li>
+                            <p class="indirizzo"><a href="#" title="Aggiungi un indirizzo">Aggiungi un indirizzo</a></p>
+                        </li>
+                        <?php
+                    } else {
+                        while ($riga = mysqli_fetch_assoc($risultato_indirizzi)) {
+                            if ($riga["tipo_indirizzo"] == "f") {
+                                $tipo_ind = "fatturazione";
+                            } else if ($riga["tipo_indirizzo"] == "s") {
+                                $tipo_ind = "spedizione";
+                            } else {
+                                $tipo_ind = "altro";
+                            } ?>
+                            <li>
+                                <p class="tipo <?php echo $tipo_ind ?>"> <?php echo ucfirst($tipo_ind) ?>:</p>
+                                <p><strong class="primary-color text-bold"><?php echo $riga["nome_indirizzo"] ?></strong></p>
+                                <p class="indirizzo"><?php echo $riga["via"] ?>, <?php echo $riga["civico"] ?> <br><?php echo $riga["cap"] ?> <?php $riga["comune"] ?> (<?php echo $riga["provincia"] ?>) <br><?php echo $riga["stato_indirizzo"] ?></p>
+                                <p class="telefono"><?php echo $riga["telefono"] ?></p>
+                                <p><a href="#" title="Modifica l'indirizzo di <?php echo $tipo_ind ?>">Modifica</a></p>
+                            </li>
+                    <?php
+                        }
+                    }
                     ?>
                 </ul>
             </section>
             <section>
                 <h3>Wishlist</h3>
-                <?php  
-                        $query_wishlist = 'SELECT * FROM wishlist w JOIN quadri q ON w.sku_quadro = q.sku WHERE id_utente = "' . $_SESSION["email"] . '"';
-                        $risultato_wishlist = mysqli_query($connTeQ, $query_wishlist);
-                        $num_righe_wishlist = mysqli_num_rows($risultato_wishlist);
-                        if ($num_righe_wishlist == 0) {
-                            echo '<p class="wishlist"><a href="#" title="Aggiungi una wishlist">Aggiungi una wishlist</a></p>';
-                        } else {
-                            while ($riga = mysqli_fetch_assoc($risultato_wishlist)) {
-                                echo '<details>';
-                                    echo '<summary class="primary-color">'.$riga["nome_wishlist"].'</summary>';
-                                    echo '<ul class="wishlist">';
-                                        echo '<li><h3><a href="#" title="Vai al prodotto">'.$riga["titolo"].'</a></h3></li>';
-                                    echo '</ul>';
-                                echo '</details>'; 
-                            }
-                        }                    
-                    ?>
+                <?php
+                $query_wishlist = 'SELECT * FROM wishlist w JOIN quadri q ON w.sku_quadro = q.sku WHERE id_utente = "' . $_SESSION["email"] . '"';
+                $risultato_wishlist = mysqli_query($connTeQ, $query_wishlist);
+                $num_righe_wishlist = mysqli_num_rows($risultato_wishlist);
+                if ($num_righe_wishlist == 0) {
+                    echo '<p class="wishlist"><a href="#" title="Aggiungi una wishlist">Aggiungi una wishlist</a></p>';
+                } else {
+                    while ($riga = mysqli_fetch_assoc($risultato_wishlist)) { ?>
+                        <details>
+                            <summary class="primary-color"><?php echo $riga["nome_wishlist"] ?></summary>
+                            <ul class="wishlist">
+                                <li>
+                                    <h3><a href="#" title="Vai al quadro"><?php echo $riga["titolo"] ?></a></h3>
+                                </li>
+                            </ul>
+                        </details>
+                <?php
+                    }
+                }
+                ?>
             </section>
             <section>
-            <ul id="user-menu-2">
-            <?php 
-            if (isset($_SESSION['loggato']) && $_SESSION['loggato'] == true) {
-                echo '<li><a href="logout.php" title="Vai alla pagina Logout"><span class="fas fa-sign-out-alt primary-color" aria-hidden="true"></span> Logout</a></li>';
-            }
-            else {
-                echo '<li>Nessun logout</li>';
-            }
-            ?>
-        </ul>
+                <ul id="user-menu-2">
+                    <?php
+                    if (isset($_SESSION['loggato']) && $_SESSION['loggato'] == true) {
+                        echo '<li><a href="logout.php" title="Vai alla pagina Logout"><span class="fas fa-sign-out-alt primary-color" aria-hidden="true"></span> Logout</a></li>';
+                    } else {
+                        echo '<li>Nessun logout</li>';
+                    }
+                    ?>
+                </ul>
             </section>
         </div>
     </main>
