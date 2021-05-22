@@ -1,4 +1,8 @@
 <?php session_start(); ?>
+<?php
+include("includes/utils.php");
+checkAccesso($_SERVER["REQUEST_URI"]);
+?>
 <!DOCTYPE html>
 <html lang="it">
 
@@ -37,7 +41,6 @@
             </thead>
             <tbody>
                 <?php
-                include("includes/utils.php");
                 //se non viene passato il parametro vuol dire che sono andata nella pagina 
                 //del carrello solo per visualizzarlo
                 if (isset($_GET["id"]) && $_GET["id"] != "") {
@@ -76,11 +79,11 @@
                             </td>
                             <td class="prices text-center">
                                 <p class="originale <?php if ($riga["sconto"]) echo 'scontato'; ?>"><span><?php echo number_format($riga["prezzo"], 2); ?>&euro;</span> <?php if ($riga["sconto"]) echo '<span class="sconto">- ' . $riga["sconto"] . '%</span>'; ?></p>
-                                <?php if ($riga["finale"])  echo '<p class="finale">' . $riga["finale"] . '&euro;</p>'; ?>
+                                <?php if ($riga["finale"])  echo '<p class="finale">' . number_format($riga["finale"], 2) . '&euro;</p>'; ?>
                             </td>
                             <td><label for="quantita-<?php echo $riga["sku"]; ?>">N. </label><input type="number" name="quantita-<?php echo $riga["sku"]; ?>" id="quantita-<?php echo $riga["sku"]; ?>" value="1" min="1" max="5"><a href="aggiorna-carrello.php?sku=<?php echo $riga["sku"]; ?>" title="Rimuovi quadro"><span class="fas fa-trash-alt" aria-hidden="true"></span></a></td>
                             <!-- https://www.php.net/manual/en/language.operators.comparison.php#language.operators.comparison.ternary -->
-                            <td class="total-price primary-color text-bold"><?php echo $riga["finale"] ? $riga["finale"] : number_format($riga["prezzo"], 2); ?>&euro;</td>
+                            <td class="total-price primary-color text-bold"><?php echo $riga["finale"] ? number_format($riga["finale"], 2) : number_format($riga["prezzo"], 2); ?>&euro;</td>
                         </tr>
                 <?php
                         $totale_carrello += $riga["finale"] ? $riga["finale"] : $riga["prezzo"];
@@ -92,12 +95,12 @@
                 <tr>
                     <td colspan="3"></td>
                     <td class="text-right">Totale prodotti (iva incl.)</td>
-                    <td class="text-right"><?php echo number_format($totale_carrello, 2); ?></td>
+                    <td class="text-right"><?php echo number_format($totale_carrello, 2); ?>&euro;</td>
                 </tr>
                 <tr>
                     <td colspan="3"></td>
                     <td class="text-right">Totale spedizione</td>
-                    <td class="text-right">80.00</td>
+                    <td class="text-right">80.00&euro;</td>
                 </tr>
                 <tr>
                     <td colspan="3"></td>
@@ -112,6 +115,7 @@
         </ul>
     </main>
     <?php include("includes/template_footer.php") ?>
+    <?php mysqli_close($connTeQ); ?>
 </body>
 
 </html>

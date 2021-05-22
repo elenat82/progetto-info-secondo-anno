@@ -1,4 +1,28 @@
 <?php session_start(); ?>
+<?php
+include("includes/utils.php");
+checkAccesso($_SERVER["REQUEST_URI"]);
+
+function printEmptyForm()
+{
+    $string = '<tr>';
+    $string .= '<form action="' . $_SERVER['PHP_SELF'] . '" method="POST" id="new-artista">';
+    $string .= '<td>';
+    $string .= '<input type="text" id="nome" name="nome" placeholder="Inserisci il nome dell\'artista" required maxlength="255">';
+    $string .= '</td>';
+    $string .= '<td>';
+    $string .= '<input type="text" id="cognome" name="cognome" placeholder="Inserisci il congnome dell\'artista" required maxlength="255">';
+    $string .= '</td>';
+    $string .= '<td class="text-center">';
+    $string .= '<button type="submit" class="primary-background secondary-color-light text-bold">Aggiungi</button>';
+    $string .= '</td>';
+    $string .= '<td>';
+    $string .= '</td>';
+    $string .= '</form>';
+    $string .= '</tr>';
+    echo $string;
+}
+?>
 <!DOCTYPE html>
 <html lang="it">
 
@@ -27,13 +51,12 @@
                     <tr>
                         <th>Nome</th>
                         <th>Cognome</th>
-                        <th>Azione</th>
-                        <th>Elimina</th>
+                        <th class="text-center">Azione</th>
+                        <th class="text-center">Elimina</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                    include("includes/utils.php");
                     if (isset($_POST["nome"]) && $_POST["nome"] != "" && isset($_POST["cognome"]) && $_POST["cognome"] != "") {
                         //se c'è l'id è una modifica, se no è un inserimento
                         if (isset($_POST["id_artista"]) && $_POST["id_artista"] != "") {
@@ -45,7 +68,7 @@
                                 header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
                                 exit();
                             } else {
-                                echo '<p class="error text-bold text-center">Si è verificato un errore, riprova!</p>';
+                                printErrorMessage();
                             }
                         } else {
                             $query_inserimento = 'INSERT INTO artisti (nome_artista, cognome_artista) VALUES ("' . $_POST["nome"] . '", "' . $_POST["cognome"] . '");';
@@ -54,30 +77,15 @@
                                 header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
                                 exit();
                             } else {
-                                echo '<p class="error text-bold text-center">Si è verificato un errore, riprova!</p>';
+                                printErrorMessage();
                             }
                         }
                     }
                     $query_artisti = 'SELECT * FROM artisti';
                     $risultato_artisti = mysqli_query($connTeQ, $query_artisti);
                     $num_righe_artisti = mysqli_num_rows($risultato_artisti);
-                    if ($num_righe_artisti == 0) { ?>
-                        <tr>
-                            <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST" id="new-artista">
-                                <td>
-                                    <input type="text" id="nome" name="nome" placeholder="Inserisci il nome dell'artista" required maxlength="255">';
-                                </td>
-                                <td>
-                                    <input type="text" id="cognome" name="cognome" placeholder="Inserisci il congnome dell'artista" required maxlength="255">
-                                </td>
-                                <td>
-                                    <button type="submit">Salva</button>
-                                </td>
-                                <td>
-                                </td>
-                            </form>
-                        </tr>
-                        <?php
+                    if ($num_righe_artisti == 0) {
+                        printEmptyForm();
                     } else {
                         while ($riga = mysqli_fetch_assoc($risultato_artisti)) { ?>
                             <tr>
@@ -89,31 +97,16 @@
                                     <td>
                                         <input type="text" id="cognome-<?php echo $riga["id_artista"] ?>" name="cognome" placeholder="Inserisci il congnome dell'artista" required maxlength="255" value="<?php echo $riga["cognome_artista"] ?>">
                                     </td>
-                                    <td>
-                                        <button type="submit">Salva</button>
+                                    <td class="text-center">
+                                        <button type="submit" class="primary-background secondary-color-light text-bold">Salva</button>
                                     </td>
-                                    <td>
-                                        <a href="admin-elimina.php?tabella=artisti&id=<?php echo $riga["id_artista"] ?>">Elimina<button>
+                                    <td class="text-center">
+                                        <a href="admin-elimina.php?tabella=artisti&id=<?php echo $riga["id_artista"] ?>"><span class="fas fa-trash-alt"></span></a>
                                     </td>
                                 </form>
                             </tr>
-                        <?php } ?>
-                        <tr>
-                            <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST" id="new-artista">
-                                <td>
-                                    <input type="text" id="nome" name="nome" placeholder="Inserisci il nome dell'artista" required maxlength="255">
-                                </td>
-                                <td>
-                                    <input type="text" id="cognome" name="cognome" placeholder="Inserisci il congnome dell'artista" required maxlength="255">
-                                </td>
-                                <td>
-                                    <button type="submit">Salva</button>
-                                </td>
-                                <td>
-                                </td>
-                            </form>
-                        </tr>
-                    <?php
+                    <?php }
+                        printEmptyForm();
                     }
                     ?>
                 </tbody>
@@ -121,6 +114,7 @@
         </div>
     </main>
     <?php include("includes/template_footer.php") ?>
+    <?php mysqli_close($connTeQ); ?>
 </body>
 
 </html>

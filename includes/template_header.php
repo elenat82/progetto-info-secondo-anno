@@ -18,12 +18,12 @@ $activePage = basename($_SERVER['PHP_SELF'], ".php");
             <?php 
             if (isset($_SESSION['loggato']) && $_SESSION['loggato'] == true) {
                 echo '<li><a href="account.php" title="Vai alla pagina Account"><span class="far fa-user primary-color" aria-hidden="true"></span> Account</a></li>';
+                echo '<li><a href="carrello.php" title="Vai alla pagina Carrello"><span class="fas fa-shopping-cart primary-color" aria-hidden="true"></span> Carrello</a></li>';
             }
             else {
                 echo '<li><a href="accedi.php" title="Vai alla pagina Registrati"><span class="far fa-user primary-color" aria-hidden="true"></span> Accedi</a></li>';
             }
             ?>
-            <li><a href="carrello.php" title="Vai alla pagina Carrello"><span class="fas fa-shopping-cart primary-color" aria-hidden="true"></span> Carrello</a></li>
         </ul>
     </div>
     <nav>
@@ -35,11 +35,14 @@ $activePage = basename($_SERVER['PHP_SELF'], ".php");
             <li><a href="contatti.php" title="Vai alla pagina Contatti" accesskey="c" class="primary-color text-bold <?php if ($activePage == 'contatti') {echo 'menu-active';} ?>">CONTATTI</a></li>
             <li><a href="lavora-con-noi.php" title="Vai alla pagina Lavora con noi" accesskey="l" class="primary-color text-bold <?php if ($activePage == 'lavora-con-noi') {echo 'menu-active';} ?>">LAVORA CON NOI</a></li>
             <?php  
+            if (isset($_SESSION['loggato']) && $_SESSION['loggato'] == true) {
                 if ($_SESSION["ruolo"] == 'a') {
                     echo '<li><a href="amministrazione.php" title="Vai alla pagina Amministrazione" accesskey="z" class="primary-color text-bold"><span class="fas fa-cogs fa-spin"></span> AMMINISTRAZIONE</a></li>';
                 }
+                echo '<li class="special"><a href="ricerca.php" title="Vai alla pagina Ricerca" accesskey="r" class="secondary-background-dark text-bold">Partecipa alla ricerca!</a></li>';
+
+            }
             ?>
-            <li><a href="ricerca.php" title="Vai alla pagina Ricerca" accesskey="r" class="secondary-background-dark text-bold">Partecipa alla ricerca!</a></li>
         </ul>
     </nav>
 </header>

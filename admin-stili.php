@@ -1,4 +1,25 @@
 <?php session_start(); ?>
+<?php
+include("includes/utils.php");
+checkAccesso($_SERVER["REQUEST_URI"]);
+function printEmptyForm()
+{
+    $string = '<tr>';
+    $string .= '<form action="' . $_SERVER['PHP_SELF'] . '" method="POST" id="new-stile">';
+    $string .= '<td>';
+    $string .= '<input type="text" id="nome" name="nome" placeholder="Inserisci il nome dello stile" required maxlength="255">';
+    $string .= '</td>';
+    $string .= '<td class="text-center">';
+    $string .= '<button type="submit"  class="primary-background secondary-color-light text-bold">Aggiungi</button>';
+    $string .= '</td>';
+    $string .= '<td>';
+    $string .= '</td>';
+    $string .= '</form>';
+    $string .= '</tr>';
+
+    echo $string;
+}
+?>
 <!DOCTYPE html>
 <html lang="it">
 
@@ -26,13 +47,12 @@
                 <thead>
                     <tr>
                         <th>Nome</th>
-                        <th>Azione</th>
-                        <th>Elimina</th>
+                        <th class="text-center">Azione</th>
+                        <th class="text-center">Elimina</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                    include("includes/utils.php");
                     if (isset($_POST["nome"]) && $_POST["nome"] != "") {
                         //se c'è l'id è una modifica, se no è un inserimento
                         if (isset($_POST["id_stile"]) && $_POST["id_stile"] != "") {
@@ -44,7 +64,7 @@
                                 header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
                                 exit();
                             } else {
-                                echo '<p class="error text-bold text-center">Si è verificato un errore. Riprovare!</p>';
+                                printErrorMessage();
                             }
                         } else {
                             $query_inserimento = 'INSERT INTO stili (nome_stile) VALUES ("' . $_POST["nome"] . '");';
@@ -53,27 +73,15 @@
                                 header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
                                 exit();
                             } else {
-                                echo '<p class="error text-bold text-center">Si è verificato un errore, riprova!</p>';
+                                printErrorMessage();
                             }
                         }
                     }
                     $query_stili = 'SELECT * FROM stili';
                     $risultato_stili = mysqli_query($connTeQ, $query_stili);
                     $num_righe_stili = mysqli_num_rows($risultato_stili);
-                    if ($num_righe_stili == 0) { ?>
-                        <tr>
-                            <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST" id="new-stile">
-                                <td>
-                                    <input type="text" id="nome" name="nome" placeholder="Inserisci il nome dello stile" required maxlength="255">
-                                </td>
-                                <td>
-                                    <button type="submit">Salva</button>
-                                </td>
-                                <td>
-                                </td>
-                            </form>
-                        </tr>
-                        <?php
+                    if ($num_righe_stili == 0) {
+                        printEmptyForm();
                     } else {
                         while ($riga = mysqli_fetch_assoc($risultato_stili)) { ?>
                             <tr>
@@ -82,29 +90,17 @@
                                         <input type="hidden" id="id-<?php echo $riga["id_stile"] ?>" name="id_stile" value="<?php echo $riga["id_stile"] ?>">
                                         <input type="text" id="nome-<?php echo $riga["id_stile"] ?>" name="nome" placeholder="Inserisci il nome dello stile" required maxlength="255" value="<?php echo $riga["nome_stile"] ?>">
                                     </td>
-                                    <td>
-                                        <button type="submit">Salva</button>
+                                    <td class="text-center">
+                                        <button type="submit" class="primary-background secondary-color-light text-bold">Salva</button>
                                     </td>
-                                    <td>
-                                        <a href="admin-elimina.php?tabella=stili&id=<?php echo $riga["id_stile"] ?>">Elimina<button>
+                                    <td class="text-center">
+                                        <a href="admin-elimina.php?tabella=stili&id=<?php echo $riga["id_stile"] ?>"><span class="fas fa-trash-alt"></span></a>
                                     </td>
                                 </form>
                             </tr>
-                        <?php
-                        } ?>
-                        <tr>
-                            <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST" id="new-stile">
-                                <td>
-                                    <input type="text" id="nome" name="nome" placeholder="Inserisci il nome dello stile" required maxlength="255">
-                                </td>
-                                <td>
-                                    <button type="submit">Salva</button>
-                                </td>
-                                <td>
-                                </td>
-                            </form>
-                        </tr>
                     <?php
+                        }
+                        printEmptyForm();
                     }
                     ?>
                 </tbody>
@@ -112,6 +108,7 @@
         </div>
     </main>
     <?php include("includes/template_footer.php") ?>
+    <?php mysqli_close($connTeQ); ?>
 </body>
 
 </html>

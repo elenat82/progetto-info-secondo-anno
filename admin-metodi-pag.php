@@ -1,4 +1,27 @@
 <?php session_start(); ?>
+<?php
+include("includes/utils.php");
+checkAccesso($_SERVER["REQUEST_URI"]);
+function printEmptyForm()
+{
+    $string = '<tr>';
+    $string .= '<form action="' . $_SERVER['PHP_SELF'] . '" method="POST" id="new-metodo">';
+    $string .= '<td>';
+    $string .= '<input type="text" id="nome" name="nome" placeholder="Inserisci il nome del metodo di pagamento" required maxlength="255">';
+    $string .= '</td>';
+    $string .= '<td>';
+    $string .= '<input type="text" id="icona" name="icona" placeholder="Inserisci la classe di FontAwesome" required maxlength="255">';
+    $string .= '</td>';
+    $string .= '<td class="text-center">';
+    $string .= '<button type="submit" class="primary-background secondary-color-light text-bold">Aggiungi</button>';
+    $string .= '</td>';
+    $string .= '<td>';
+    $string .= '</td>';
+    $string .= '</form>';
+    $string .= '</tr>';
+    echo $string;
+}
+?>
 <!DOCTYPE html>
 <html lang="it">
 
@@ -27,13 +50,12 @@
                     <tr>
                         <th>Nome</th>
                         <th>Icona</th>
-                        <th>Azione</th>
-                        <th>Elimina</th>
+                        <th class="text-center">Azione</th>
+                        <th class="text-center">Elimina</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                    include("includes/utils.php");
                     if (isset($_POST["nome"]) && $_POST["nome"] != "" && isset($_POST["icona"]) && $_POST["icona"] != "") {
                         //se c'è l'id è una modifica, se no è un inserimento
                         if (isset($_POST["id_metodo_pag"]) && $_POST["id_metodo_pag"] != "") {
@@ -45,7 +67,7 @@
                                 header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
                                 exit();
                             } else {
-                                echo '<p class="error text-bold text-center">Si è verificato un errore. Riprovare!</p>';
+                                printErrorMessage();
                             }
                         } else {
                             $query_inserimento = 'INSERT INTO metodipagamento (nome_metodo_pag, icona_metodo_pag) VALUES ("' . $_POST["nome"] . '", "' . $_POST["icona"] . '");';
@@ -54,30 +76,15 @@
                                 header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
                                 exit();
                             } else {
-                                echo '<p class="error text-bold text-center">Si è verificato un errore, riprova!</p>';
+                                printErrorMessage();
                             }
                         }
                     }
                     $query_metodi = 'SELECT * FROM metodipagamento';
                     $risultato_metodi = mysqli_query($connTeQ, $query_metodi);
                     $num_righe_metodi = mysqli_num_rows($risultato_metodi);
-                    if ($num_righe_metodi == 0) { ?>
-                        <tr>
-                            <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST" id="new-metodo">
-                                <td>
-                                    <input type="text" id="nome" name="nome" placeholder="Inserisci il nome del metodo di pagamento" required maxlength="255">
-                                </td>
-                                <td>
-                                    <input type="text" id="icona" name="icona" placeholder="Inserisci la classe di FontAwesome" required maxlength="255">
-                                </td>
-                                <td>
-                                    <button type="submit">Salva</button>
-                                </td>
-                                <td>
-                                </td>
-                            </form>
-                        </tr>
-                        <?php
+                    if ($num_righe_metodi == 0) {
+                        printEmptyForm();
                     } else {
                         while ($riga = mysqli_fetch_assoc($risultato_metodi)) { ?>
                             <tr>
@@ -89,32 +96,17 @@
                                     <td>
                                         <input type="text" id="icona-<?php echo $riga["id_metodo_pag"] ?>" name="icona" placeholder="Inserisci la classe di FontAwesome" required maxlength="255" value="<?php echo $riga["icona_metodo_pag"] ?>">
                                     </td>
-                                    <td>
-                                        <button type="submit">Salva</button>
+                                    <td class="text-center">
+                                        <button type="submit" class="primary-background secondary-color-light text-bold">Salva</button>
                                     </td>
-                                    <td>
-                                        <a href="admin-elimina.php?tabella=metodipagamento&id=<?php echo $riga["id_metodo_pag"] ?>">Elimina<button>
+                                    <td class="text-center">
+                                        <a href="admin-elimina.php?tabella=metodipagamento&id=<?php echo $riga["id_metodo_pag"] ?>"><span class="fas fa-trash-alt"></span></a>
                                     </td>
                                 </form>
                             </tr>
-                        <?php
-                        } ?>
-                        <tr>
-                            <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST" id="new-metodo">
-                                <td>
-                                    <input type="text" id="nome" name="nome" placeholder="Inserisci il nome del metodo di pagamento" required maxlength="255">
-                                </td>
-                                <td>
-                                    <input type="text" id="icona" name="icona" placeholder="Inserisci la classe di FontAwesome" required maxlength="255">
-                                </td>
-                                <td>
-                                    <button type="submit">Salva</button>
-                                </td>
-                                <td>
-                                </td>
-                            </form>
-                        </tr>
                     <?php
+                        }
+                        printEmptyForm();
                     }
                     ?>
                 </tbody>
@@ -122,6 +114,7 @@
         </div>
     </main>
     <?php include("includes/template_footer.php") ?>
+    <?php mysqli_close($connTeQ); ?>
 </body>
 
 </html>

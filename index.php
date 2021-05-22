@@ -1,4 +1,5 @@
 <?php session_start(); ?>
+<?php include("includes/utils.php"); ?>
 <!DOCTYPE html>
 <html lang="it">
 
@@ -23,7 +24,6 @@
         <h2 class="primary-color">I nostri stili pittorici</h2>
         <ul id="categorie">
             <?php
-            include("includes/utils.php");
             $query_stili = "SELECT * FROM stili";
             $risultato = mysqli_query($connTeQ, $query_stili);
             $num_righe = mysqli_num_rows($risultato);
@@ -51,11 +51,11 @@
                     echo '<li class="'.strtolower($riga["cognome_artista"]).'"><a href="#" title="Vai alla pagina di '.$riga["nome_artista"].' '.$riga["cognome_artista"].' " class="text-bold">'.$riga["nome_artista"].' '.$riga["cognome_artista"].'</a></li>';
                 }
             }
-            mysqli_close($connTeQ);
             ?>
         </ul>
     </main>
     <?php include("includes/template_footer.php") ?>
+    <?php mysqli_close($connTeQ); ?>
 </body>
 
 </html>

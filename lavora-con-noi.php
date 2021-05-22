@@ -1,4 +1,5 @@
 <?php session_start(); ?>
+<?php include("includes/utils.php"); ?>
 <!DOCTYPE html>
 <html lang="it">
 
@@ -60,5 +61,6 @@
         
     </main>
     <?php include("includes/template_footer.php") ?>
+    <?php mysqli_close($connTeQ); ?>
 </body>
 </html>

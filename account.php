@@ -1,4 +1,8 @@
 <?php session_start(); ?>
+<?php
+    include("includes/utils.php");
+    checkAccesso($_SERVER["REQUEST_URI"]);
+?>
 <!DOCTYPE html>
 <html lang="it">
 
@@ -77,7 +81,6 @@
                     </thead>
                     <tbody>
                         <?php
-                        include("includes/utils.php");
                         $query_ordini = 'SELECT * FROM ordini o JOIN stati_ordine s ON o.id_stato_ord = s.id_stato_ordine JOIN metodipagamento m ON m.id_metodo_pag = o.tipo_pag_ord WHERE o.id_utente = "' . $_SESSION["email"] . '"';
                         $risultato_ordini = mysqli_query($connTeQ, $query_ordini);
                         $num_righe_ordini = mysqli_num_rows($risultato_ordini);
@@ -166,8 +169,6 @@
                     <?php
                     if (isset($_SESSION['loggato']) && $_SESSION['loggato'] == true) {
                         echo '<li><a href="logout.php" title="Vai alla pagina Logout"><span class="fas fa-sign-out-alt primary-color" aria-hidden="true"></span> Logout</a></li>';
-                    } else {
-                        echo '<li>Nessun logout</li>';
                     }
                     ?>
                 </ul>
@@ -175,6 +176,7 @@
         </div>
     </main>
     <?php include("includes/template_footer.php") ?>
+    <?php mysqli_close($connTeQ); ?>
 </body>
 
 </html>

@@ -1,4 +1,5 @@
 <?php session_start(); ?>
+<?php include("includes/utils.php"); ?>
 <!DOCTYPE html>
 <html lang="it">
 
@@ -22,17 +23,19 @@
         <?php
         $_SESSION["loggato"] = false;
         $_SESSION["email"] = null;
-        $_SESSION["cognome"] = null;
-        $_SESSION["nome"] = null;
+        $_SESSION["cognome_utente"] = null;
+        $_SESSION["nome_utente"] = null;
         $_SESSION["datanascita"] = null;
         $_SESSION["sesso"] = null;
         $_SESSION["ruolo"] = null;
+        $_SESSION["carrello"] = null;
         ?>
         <div class="thank-you-message">
             <p class="text-center text-bold">Sei stato sloggato con successo!</p>
         </div>
     </main>
     <?php include("includes/template_footer.php") ?>
+    <?php mysqli_close($connTeQ); ?>
 </body>
 
 </html>

@@ -172,6 +172,9 @@ input[type="date"],
 input[type="file"] {
     width: 50%;
 }
+input[readonly] {
+    background-color: #c5c5d3;
+}
 fieldset {
     padding: 0.5rem;
     margin-top: 1rem;
@@ -326,7 +329,7 @@ nav ul li a.menu-active {
     background-color: #49b6a8;
     color: white;
 }
-nav ul li:last-child a {
+nav ul li.special a {
     color: white;
     position: fixed;
     right: 0;
@@ -335,7 +338,7 @@ nav ul li:last-child a {
     border-bottom-left-radius: 40px;
     padding: 0.5rem 0.5rem 0.5rem 2rem;
 }
-nav ul li:last-child a:hover {
+nav ul li.special a:hover {
     color: #55536a;
     transition: all linear 0.3s;
 }
@@ -774,6 +777,29 @@ details .wishlist a {
 }
 table.amministrazione {
     width: 100%;
+    margin-top: 2rem;
+}
+table.amministrazione tr td {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+table.amministrazione.quadro tr:nth-child(4n + 1) th {
+    padding-top: 3rem;
+}
+
+#pagina-amministrazione-utenti ul,
+#pagina-amministrazione-quadri ul {
+    margin: 2rem 0;
+}
+
+#pagina-amministrazione-utenti ul li,
+#pagina-amministrazione-quadri ul li {
+    padding: 1rem;
+}
+#pagina-amministrazione-utenti ul li a,
+#pagina-amministrazione-quadri ul li a {
+    padding-left: 3rem;
 }
 
 /* ---------- RESPONSIVE ------------- */

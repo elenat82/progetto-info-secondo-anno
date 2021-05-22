@@ -1,4 +1,34 @@
 <?php session_start(); ?>
+<?php
+include("includes/utils.php");
+checkAccesso($_SERVER["REQUEST_URI"]);
+function printEmptyForm()
+{
+    $string = '<tr>';
+    $string .= '<form action="' . $_SERVER['PHP_SELF'] . '" method="POST" id="new-utente">';
+    $string .= '<td>';
+    $string .= '<input type="hidden" id="azione" name="azione" value="inserisci">';
+    $string .= '<input type="email" id="email" name="email" placeholder="Inserisci l\'email dell\'utente" required maxlength="255">';
+    $string .= '</td>';
+    $string .= '<td>';
+    $string .= '<input type="text" id="nome" name="nome_utente" placeholder="Inserisci il nome dell\'utente" required maxlength="255">';
+    $string .= '</td>';
+    $string .= '<td>';
+    $string .= '<input type="text" id="cognome" name="cognome_utente" placeholder="Inserisci il cognome dell\'utente" required maxlength="255">';
+    $string .= '</td>';
+    $string .= '<td>';
+    $string .= '<input type="radio" id="ruolo-a" name="ruolo" value="a" required> Admin <input type="radio" id="ruolo-u" name="ruolo" value="u" required> User';
+    $string .= '</td>';
+    $string .= '<td class="text-center">';
+    $string .= '<button type="submit"  class="primary-background secondary-color-light text-bold">Aggiungi</button>';
+    $string .= '</td>';
+    $string .= '<td>';
+    $string .= '</td>';
+    $string .= '</form>';
+    $string .= '</tr>';
+    echo $string;
+}
+?>
 <!DOCTYPE html>
 <html lang="it">
 
@@ -29,17 +59,23 @@
                         <th>Nome</th>
                         <th>Cognome</th>
                         <th>Ruolo</th>
-                        <th>Elimina</th>
+                        <th class="text-center">Azioni</th>
+                        <th class="text-center">Elimina</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                    include("includes/utils.php");
-                    if (isset($_POST["email"]) && $_POST["email"] != "" && isset($_POST["nome"]) && $_POST["nome"] != "" && isset($_POST["cognome"]) && $_POST["cognome"] != "" && isset($_POST["ruolo"]) && $_POST["ruolo"] != "") {
+                    /* echo '<pre style="background: aqua">';
+                    print_r($_POST);
+                    echo '</pre>'; */
+                    if (isset($_POST["email"]) && $_POST["email"] != "" && isset($_POST["nome_utente"]) && $_POST["nome_utente"] != "" && isset($_POST["cognome_utente"]) && $_POST["cognome_utente"] != "" && isset($_POST["ruolo"]) && $_POST["ruolo"] != "") {
                         //guardo il campo hidden azione
                         if (isset($_POST["azione"]) && $_POST["azione"] == "modifica") {
                             //password, data nascita e sesso ogni utente se li cambia da solo, il campo attivo si cambia con Elimina
-                            $query_modifica = 'UPDATE utenti SET email = "' . $_POST["email"] . '", nome_utente = "' . $_POST["nome"] . '", cognome_utente = "' . $_POST["cognome"] . '", ruolo = "' . $_POST["ruolo"] . '" WHERE email = "' . $_POST["email"] . '";';
+                            $query_modifica = 'UPDATE utenti SET nome_utente = "' . $_POST["nome_utente"] . '", cognome_utente = "' . $_POST["cognome_utente"] . '", ruolo = "' . $_POST["ruolo"] . '" WHERE email = "' . $_POST["email"] . '";';
+                            /* echo '<pre style="background: coral">';
+                            print_r($query_modifica);
+                            echo '</pre>'; */
                             $risultato_modifica = mysqli_query($connTeQ, $query_modifica);
                             if ($risultato_modifica) {
                                 //per evitare che dentro $_POST restino i dati dopo aver inviato il post
@@ -47,47 +83,26 @@
                                 header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
                                 exit();
                             } else {
-                                echo '<p class="error text-bold text-center">Si è verificato un errore. Riprovare!</p>';
+                                printErrorMessage();
                             }
                         } else {
                             //l'utente appena inserito è attivo di default, la password di default è nomecognome
-                            $query_inserimento = 'INSERT INTO utenti (email, nome_utente, cognome_utente, password, ruolo, attivo) VALUES ("' . $_POST["email"] . '", "' . $_POST["nome"] . '", "' . $_POST["cognome"] . '", "' . $_POST["nome"] . $_POST["cognome"] . '", "' . $_POST["ruolo"] . '", 1);';
+                            $query_inserimento = 'INSERT INTO utenti (email, nome_utente, cognome_utente, password, ruolo, attivo) VALUES ("' . $_POST["email"] . '", "' . $_POST["nome_utente"] . '", "' . $_POST["cognome_utente"] . '", "' . $_POST["nome_utente"] . $_POST["cognome_utente"] . '", "' . $_POST["ruolo"] . '", 1);';
                             $risultato_inserimento = mysqli_query($connTeQ, $query_inserimento);
                             if ($risultato_inserimento) {
                                 header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
                                 exit();
                             } else {
-                                echo '<p class="error text-bold text-center">Si è verificato un errore, riprova!</p>';
+                                printErrorMessage();
                             }
                         }
                     }
-                    $query_utenti = 'SELECT * FROM utenti WHERE attivo = 1';
+                    //seleziono tutti gli utenti attivi tranne quello loggato, se vuole modificarsi le sue informazioni lo fa nella pagina del suo account
+                    $query_utenti = 'SELECT * FROM utenti WHERE attivo = 1 AND email != "'.$_SESSION["email"].'"';
                     $risultato_utenti = mysqli_query($connTeQ, $query_utenti);
                     $num_righe_utenti = mysqli_num_rows($risultato_utenti);
-                    if ($num_righe_utenti == 0) { ?>
-                        <tr>
-                            <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST" id="new-utente">
-                                <td>
-                                    <input type="hidden" id="azione" name="azione" value="inserisci">
-                                    <input type="email" id="email" name="email" placeholder="Inserisci l'email dell'utente" required maxlength="255">
-                                </td>
-                                <td>
-                                    <input type="text" id="nome" name="nome" placeholder="Inserisci il nome dell\'utente" required maxlength="255">
-                                </td>
-                                <td>
-                                    <input type="text" id="cognome" name="cognome" placeholder="Inserisci il cognome dell\'utente" required maxlength="255">
-                                </td>
-                                <td>
-                                    <input type="radio" id="ruolo-a" name="ruolo" value="a" required> Admin <input type="radio" id="ruolo-u" name="ruolo" value="u" required> User';
-                                </td>
-                                <td>
-                                    <button type="submit">Salva</button>
-                                </td>
-                                <td>
-                                </td>
-                            </form>
-                        </tr>
-                        <?php
+                    if ($num_righe_utenti == 0) {
+                        printEmptyForm();
                     } else {
                         foreach ($risultato_utenti as $key => $value) {
                             $isAdmin = false;
@@ -98,13 +113,13 @@
                                 <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST" id="utente-<?php echo $key ?>">
                                     <td>
                                         <input type="hidden" id="azione" name="azione" value="modifica">
-                                        <input type="email" id="email-<?php echo $key ?>" name="email" placeholder="Inserisci l'email dell'utente" required maxlength="255" value="<?php echo $value["email"] ?>">
+                                        <input type="email" id="email-<?php echo $key ?>" name="email" placeholder="Inserisci l'email dell'utente" required maxlength="255" value="<?php echo $value["email"] ?>" readonly>
                                     </td>
                                     <td>
-                                        <input type="text" id="nome-<?php echo $key ?>" name="nome" placeholder="Inserisci il nome dell'utente" required maxlength="255" value="<?php echo $value["nome_utente"] ?>">
+                                        <input type="text" id="nome-<?php echo $key ?>" name="nome_utente" placeholder="Inserisci il nome dell'utente" required maxlength="255" value="<?php echo $value["nome_utente"] ?>">
                                     </td>
                                     <td>
-                                        <input type="text" id="cognome-<?php echo $key ?>" name="cognome" placeholder="Inserisci il cognome dell'utente" required maxlength="255" value="<?php echo $value["cognome_utente"] ?>">
+                                        <input type="text" id="cognome-<?php echo $key ?>" name="cognome_utente" placeholder="Inserisci il cognome dell'utente" required maxlength="255" value="<?php echo $value["cognome_utente"] ?>">
                                     </td>
                                     <td>
                                         <?php
@@ -114,38 +129,16 @@
                                             echo '<input type="radio" id="ruolo-a" name="ruolo" value="a" required> Admin <input type="radio" id="ruolo-u" name="ruolo" value="u" required checked> User';
                                         } ?>
                                     </td>
-                                    <td>
-                                        <button type="submit">Salva</button>
+                                    <td class="text-center">
+                                        <button type="submit" class="primary-background secondary-color-light text-bold">Salva</button>
                                     </td>
-                                    <td>
-                                        <a href="admin-elimina.php?tabella=utenti&id=<?php echo $value["email"] ?>&action=elimina">Elimina<button>
+                                    <td class="text-center">
+                                        <a href="admin-elimina.php?tabella=utenti&id=<?php echo $value["email"] ?>&action=elimina"><span class="fas fa-trash-alt"></span></a>
                                     </td>
                                 </form>
                             </tr>
-                        <?php } ?>
-                        <tr>
-                            <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST" id="new-utente">
-                                <td>
-                                    <input type="hidden" id="azione" name="azione" value="inserisci">
-                                    <input type="email" id="email" name="email" placeholder="Inserisci l'email dell'utente" required maxlength="255">
-                                </td>
-                                <td>
-                                    <input type="text" id="nome" name="nome" placeholder="Inserisci il nome dell'utente" required maxlength="255">
-                                </td>
-                                <td>
-                                    <input type="text" id="cognome" name="cognome" placeholder="Inserisci il cognome dell'utente" required maxlength="255">
-                                </td>
-                                <td>
-                                    <input type="radio" id="ruolo-a" name="ruolo" value="a" required> Admin <input type="radio" id="ruolo-u" name="ruolo" value="u" required> User
-                                </td>
-                                <td>
-                                    <button type="submit">Salva</button>
-                                </td>
-                                <td>
-                                </td>
-                            </form>
-                        </tr>
-                    <?php
+                    <?php }
+                        printEmptyForm();
                     }
                     ?>
                 </tbody>
@@ -169,6 +162,7 @@
         </div>
     </main>
     <?php include("includes/template_footer.php") ?>
+    <?php mysqli_close($connTeQ); ?>
 </body>
 
 </html>

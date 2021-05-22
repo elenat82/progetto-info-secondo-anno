@@ -71,7 +71,16 @@
 
                             }
                             else {
-                                echo '<p id="cta" class="text-bold text-center"><a href="carrello.php?id='.$riga["sku"].'" title="Aggiungi al carrello" class="primary-background"><span class="fas fa-shopping-cart" aria-hidden="true"></span> ACQUISTA ORA</a></p>';
+                                //se l'utente è loggato lo mando al carrello, se no lo mando al login
+                                if (isset($_SESSION["loggato"]) && $_SESSION["loggato"] == true) {
+                                    $redirect = 'carrello.php?id='.$riga["sku"];
+                                    $title = 'Aggiungi al carrello';
+                                }
+                                else {
+                                    $redirect = 'accedi.php';
+                                    $title = 'Accedi o registrati';
+                                }
+                                echo '<p id="cta" class="text-bold text-center"><a href="'.$redirect.'" title="'.$title.'" class="primary-background"><span class="fas fa-shopping-cart" aria-hidden="true"></span> ACQUISTA ORA</a></p>';
                             }
                              ?>
                         </div>
@@ -90,6 +99,7 @@
         <?php } ?>
     </main>
     <?php include("includes/template_footer.php") ?>
+    <?php mysqli_close($connTeQ); ?>
 </body>
 
 </html>

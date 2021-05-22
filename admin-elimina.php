@@ -1,4 +1,8 @@
 <?php session_start(); ?>
+<?php
+include("includes/utils.php");
+checkAccesso($_SERVER["REQUEST_URI"]);
+?>
 <!DOCTYPE html>
 <html lang="it">
 
@@ -44,7 +48,6 @@
         <div id="pagina-amministrazione-elimina">
             <h2>Eliminazione</h2>
             <?php
-            include("includes/utils.php");
             //per gli utenti e i quadri non faccio veramente la cancellazione ma uso un campo attivo/non attivo, per le altre tabelle faccio proprio la delete del record
             if ($_GET["tabella"] == 'utenti' || $_GET["tabella"] == 'quadri') {
                 if ($_GET["action"] == "elimina") {
@@ -65,7 +68,7 @@
                     echo '</div>';
                 } else {
                     echo '<div class="thank-you-message">';
-                    echo '<p class="error text-bold text-center">Si è verificato un errore. Riprovare!</p>';
+                    printErrorMessage();
                     echo '</div>';
                 }
             } else {
@@ -91,7 +94,7 @@
                     echo '</div>';
                 } else {
                     echo '<div class="thank-you-message">';
-                    echo '<p class="error text-bold text-center">Si è verificato un errore. Riprovare!</p>';
+                    printErrorMessage();
                     echo '</div>';
                 }
             }
@@ -99,6 +102,7 @@
         </div>
     </main>
     <?php include("includes/template_footer.php") ?>
+    <?php mysqli_close($connTeQ); ?>
 </body>
 
 </html>

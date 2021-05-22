@@ -1,4 +1,77 @@
 <?php session_start(); ?>
+<?php
+include("includes/utils.php");
+checkAccesso($_SERVER["REQUEST_URI"]);
+function printEmptyForm($artisti, $stili)
+{
+    $string = '<tr>';
+    $string .= '<th>Sku</th>';
+    $string .= '<th>Titolo</th>';
+    $string .= '<th>Prezzo</th>';
+    $string .= '<th>Sconto</th>';
+    $string .= '<th>Finale</th>';
+    $string .= '<th>Immagine</th>';
+    $string .= '</tr>';
+    $string .= '<tr>';
+    $string .= '<form action="' . $_SERVER['PHP_SELF'] . '" method="POST" id="new-quadro">';
+    $string .= '<td>';
+    $string .= '<input type="hidden" id="azione" name="azione" value="inserisci">';
+    $string .= '<input type="text" id="sku" name="sku" placeholder="Inserisci l\'sku del quadro" required maxlength="5">';
+    $string .= '</td>';
+    $string .= '<td>';
+    $string .= '<input type="text" id="titolo" name="titolo" placeholder="Inserisci il titolo del quadro" required
+                maxlength="255">';
+    $string .= '</td>';
+    $string .= '<td>';
+    $string .= '<input type="number" id="prezzo" name="prezzo" placeholder="Inserisci il prezzo del quadro" required>';
+    $string .= '</td>';
+    $string .= '<td>';
+    $string .= '<input type="number" id="sconto" name="sconto" placeholder="Inserisci lo sconto del quadro">';
+    $string .= '</td>';
+    $string .= '<td>';
+    $string .= '<input type="number" id="finale" name="finale" placeholder="Inserisci il prezzo finale del quadro">';
+    $string .= '</td>';
+    $string .= '<td>';
+    $string .= '<input type="text" id="immagine" name="immagine" placeholder="Inserisci l\'immagine del quadro" required>';
+    $string .= '</td>';
+    $string .= '</tr>';
+    $string .= '<tr>';
+    $string .= '<th colspan="2">Mappa</th>';
+    $string .= '<th>Artista</th>';
+    $string .= '<th>Stile</th>';
+    $string .= '<th class="text-center">Azione</th>';
+    $string .= '<th></th>';
+    $string .= '</tr>';
+    $string .= '<tr>';
+    $string .= '<td colspan="2">';
+    $string .= '<textarea id="mappa" name="mappa" placeholder="Inserisci l\'url della mappa" required maxlength="500"></textarea>';
+    $string .= '</td>';
+    $string .= '<td>';
+    $string .= '<select id="id_artista" name="id_artista">';
+    $string .= '<option value="">Scegli un artista</option>';
+    foreach ($artisti as $key => $art) {
+        $string .= '<option value="' . $art["id_artista"] . '" required>' . $art["nome_artista"] . ' ' . $art["cognome_artista"] . '</option>';
+    }
+    $string .= '</select>';
+    $string .= '</td>';
+    $string .= '<td>';
+    $string .= '<select id="id_stile" name="id_stile">';
+    $string .= '<option value="">Scegli uno stile</option>';
+    foreach ($stili as $key => $stile) {
+        $string .= '<option value="' . $stile["id_stile"] . '" required>' . $stile["nome_stile"] . '</option>';
+    }
+    $string .= '</select>';
+    $string .= '</td>';
+    $string .= '<td>';
+    $string .= '<button type="submit" class="primary-background secondary-color-light text-bold">Aggiungi</button>';
+    $string .= '</td>';
+    $string .= '<td>';
+    $string .= '</td>';
+    $string .= '</form>';
+    $string .= '</tr>';
+    echo $string;
+}
+?>
 <!DOCTYPE html>
 <html lang="it">
 
@@ -20,12 +93,11 @@
             <li><a href="amministrazione.php" title="Vai alla pagina Amministrazione" class="text-bold">Amministrazione</a></li>
             <li class="last">Quadri</li>
         </ol>
-        <div id="pagina-amministrazione-utenti">
+        <div id="pagina-amministrazione-quadri">
             <h2>Amministrazione Quadri</h2>
-            <table class="amministrazione">
+            <table class="amministrazione quadro">
                 <tbody>
                     <?php
-                    include("includes/utils.php");
                     if (isset($_POST["sku"]) && $_POST["sku"] != "" && isset($_POST["titolo"]) && $_POST["titolo"] != "" && isset($_POST["prezzo"]) && $_POST["prezzo"] != "" && isset($_POST["immagine"]) && $_POST["immagine"] != "" && isset($_POST["mappa"]) && $_POST["mappa"] != "" && isset($_POST["id_artista"]) && $_POST["id_artista"] != "" && isset($_POST["id_stile"]) && $_POST["id_stile"] != "") {
                         $sconto = 0;
                         if ($_POST["sconto"]) {
@@ -45,7 +117,7 @@
                                 /* header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
                                 exit(); */
                             } else {
-                                echo '<p class="error text-bold text-center">Si è verificato un errore. Riprovare!</p>';
+                                printErrorMessage();
                             }
                         } else {
                             //attivo è di default a true
@@ -55,7 +127,7 @@
                                 header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
                                 exit();
                             } else {
-                                echo '<p class="error text-bold text-center">Si è verificato un errore, riprova!</p>';
+                                printErrorMessage();
                             }
                         }
                     }
@@ -66,74 +138,8 @@
                     $query_quadri = 'SELECT * FROM quadri WHERE attivo = 1';
                     $risultato_quadri = mysqli_query($connTeQ, $query_quadri);
                     $num_righe_quadri = mysqli_num_rows($risultato_quadri);
-                    if ($num_righe_quadri == 0) { ?>
-                        <tr>
-                            <th>Sku</th>
-                            <th>Titolo</th>
-                            <th>Prezzo</th>
-                            <th>Sconto</th>
-                            <th>Finale</th>
-                            <th>Immagine</th>
-                        </tr>
-                        <tr>
-                            <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST" id="new-quadro">
-                                <td>
-                                    <input type="hidden" id="azione" name="azione" value="inserisci">
-                                    <input type="text" id="sku" name="sku" placeholder="Inserisci l'sku del quadro" required maxlength="5">
-                                </td>
-                                <td>
-                                    <input type="text" id="titolo" name="titolo" placeholder="Inserisci il titolo del quadro" required maxlength="255">
-                                </td>
-                                <td>
-                                    <input type="number" id="prezzo" name="prezzo" placeholder="Inserisci il prezzo del quadro" required>
-                                </td>
-                                <td>
-                                    <input type="number" id="sconto" name="sconto" placeholder="Inserisci lo sconto del quadro">
-                                </td>
-                                <td>
-                                    <input type="number" id="finale" name="finale" placeholder="Inserisci il prezzo finale del quadro">
-                                </td>
-                                <td>
-                                    <input type="text" id="immagine" name="immagine" placeholder="Inserisci l'immagine del quadro" required>
-                                </td>
-                        </tr>
-                        <tr>
-                            <th colspan="2">Mappa</th>
-                            <th>Artista</th>
-                            <th>Stile</th>
-                            <th>Azione</th>
-                            <th>Elimina</th>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <textarea id="mappa" name="mappa" placeholder="Inserisci l'url della mappa" required maxlength="500"></textarea>
-                            </td>
-                            <td>
-                                <select id="id_artista" name="id_artista">
-                                    <option value="">Scegli un artista</option>
-                                    <?php
-                                    foreach ($risultato_artisti as $key => $art) {
-                                        echo '<option value="' . $art["id_artista"] . '" required>' . $art["nome_artista"] . ' ' . $art["cognome_artista"] . '</option>';
-                                    } ?>
-                                </select>
-                            </td>
-                            <td>
-                                <select id="id_stile" name="id_stile">
-                                    <option value="">Scegli uno stile</option>
-                                    <?php
-                                    foreach ($risultato_stili as $key => $stile) {
-                                        echo '<option value="' . $stile["id_stile"] . '" required>' . $stile["nome_stile"] . '</option>';
-                                    } ?>
-                                </select>
-                            </td>
-                            <td>
-                                <button type="submit">Salva</button>
-                            </td>
-                            <td>
-                            </td>
-                            </form>
-                        </tr>
-                        <?php
+                    if ($num_righe_quadri == 0) {
+                        printEmptyForm($risultato_artisti, $risultato_stili);
                     } else {
                         foreach ($risultato_quadri as $key => $value) { ?>
                             <tr>
@@ -170,8 +176,8 @@
                                 <th colspan="2">Mappa</th>
                                 <th>Artista</th>
                                 <th>Stile</th>
-                                <th>Azione</th>
-                                <th>Elimina</th>
+                                <th class="text-center">Azione</th>
+                                <th class="text-center">Elimina</th>
                             </tr>
                             <tr>
                                 <td colspan="2">
@@ -197,82 +203,16 @@
                                         } ?>
                                     </select>
                                 </td>
-                                <td>
-                                    <button type="submit">Salva</button>
+                                <td class="text-center">
+                                    <button type="submit" class="primary-background secondary-color-light text-bold">Salva</button>
                                 </td>
-                                <td>
-                                    <a href="admin-elimina.php?tabella=quadri&id=<?php echo $value["sku"] ?>&action=elimina">Elimina<button>
+                                <td class="text-center">
+                                    <a href="admin-elimina.php?tabella=quadri&id=<?php echo $value["sku"] ?>&action=elimina"><span class="fas fa-trash-alt"></span></a>
                                 </td>
                                 </form>
                             </tr>
-                        <?php } ?>
-                        <tr>
-                            <th>Sku</th>
-                            <th>Titolo</th>
-                            <th>Prezzo</th>
-                            <th>Sconto</th>
-                            <th>Finale</th>
-                            <th>Immagine</th>
-                        </tr>
-                        <tr>
-                            <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST" id="new-quadro">
-                                <td>
-                                    <input type="hidden" id="azione" name="azione" value="inserisci">
-                                    <input type="text" id="sku" name="sku" placeholder="Inserisci l'sku del quadro" required maxlength="5">
-                                </td>
-                                <td>
-                                    <input type="text" id="titolo" name="titolo" placeholder="Inserisci il titolo del quadro" required maxlength="255">
-                                </td>
-                                <td>
-                                    <input type="number" id="prezzo" name="prezzo" placeholder="Inserisci il prezzo del quadro" required>
-                                </td>
-                                <td>
-                                    <input type="number" id="sconto" name="sconto" placeholder="Inserisci lo sconto del quadro">
-                                </td>
-                                <td>
-                                    <input type="number" id="finale" name="finale" placeholder="Inserisci il prezzo finale del quadro">
-                                </td>
-                                <td>
-                                    <input type="text" id="immagine" name="immagine" placeholder="Inserisci l'immagine del quadro" required>
-                                </td>
-                        </tr>
-                        <tr>
-                            <th colspan="2">Mappa</th>
-                            <th>Artista</th>
-                            <th>Stile</th>
-                            <th>Azione</th>
-                            <th>Elimina</th>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <textarea id="mappa" name="mappa" placeholder="Inserisci l'url della mappa" required maxlength="500"></textarea>
-                            </td>
-                            <td>
-                                <select id="id_artista" name="id_artista">
-                                    <option value="">Scegli un artista</option>
-                                    <?php
-                                    foreach ($risultato_artisti as $key => $art) {
-                                        echo '<option value="' . $art["id_artista"] . '" required>' . $art["nome_artista"] . ' ' . $art["cognome_artista"] . '</option>';
-                                    } ?>
-                                </select>
-                            </td>
-                            <td>
-                                <select id="id_stile" name="id_stile">
-                                    <option value="">Scegli uno stile</option>
-                                    <?php
-                                    foreach ($risultato_stili as $key => $stile) {
-                                        echo '<option value="' . $stile["id_stile"] . '" required>' . $stile["nome_stile"] . '</option>';
-                                    } ?>
-                                </select>
-                            </td>
-                            <td>
-                                <button type="submit">Salva</button>
-                            </td>
-                            <td>
-                            </td>
-                            </form>
-                        </tr>
-                    <?php
+                    <?php }
+                        printEmptyForm($risultato_artisti, $risultato_stili);
                     }
                     ?>
                 </tbody>
@@ -296,6 +236,7 @@
         </div>
     </main>
     <?php include("includes/template_footer.php") ?>
+    <?php mysqli_close($connTeQ); ?>
 </body>
 
 </html>
