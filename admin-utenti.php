@@ -65,17 +65,11 @@ function printEmptyForm()
                 </thead>
                 <tbody>
                     <?php
-                    /* echo '<pre style="background: aqua">';
-                    print_r($_POST);
-                    echo '</pre>'; */
                     if (isset($_POST["email"]) && $_POST["email"] != "" && isset($_POST["nome_utente"]) && $_POST["nome_utente"] != "" && isset($_POST["cognome_utente"]) && $_POST["cognome_utente"] != "" && isset($_POST["ruolo"]) && $_POST["ruolo"] != "") {
                         //guardo il campo hidden azione
                         if (isset($_POST["azione"]) && $_POST["azione"] == "modifica") {
                             //password, data nascita e sesso ogni utente se li cambia da solo, il campo attivo si cambia con Elimina
                             $query_modifica = 'UPDATE utenti SET nome_utente = "' . $_POST["nome_utente"] . '", cognome_utente = "' . $_POST["cognome_utente"] . '", ruolo = "' . $_POST["ruolo"] . '" WHERE email = "' . $_POST["email"] . '";';
-                            /* echo '<pre style="background: coral">';
-                            print_r($query_modifica);
-                            echo '</pre>'; */
                             $risultato_modifica = mysqli_query($connTeQ, $query_modifica);
                             if ($risultato_modifica) {
                                 //per evitare che dentro $_POST restino i dati dopo aver inviato il post

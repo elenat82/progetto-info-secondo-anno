@@ -13,7 +13,6 @@ function checkAccesso($pagina)
     //$_SERVER is an array containing information such as headers, paths, and script locations. The entries in this array are created by the web server
     //'PHP_SELF' The filename of the currently executing script, relative to the document root.
     //'REQUEST_URI' The URI which was given in order to access this page; for instance, '/index.html'.
-    print_r($pagina);
     if (strpos($pagina, 'account') !== false || strpos($pagina, 'carrello') !== false || strpos($pagina, 'ricerca') !== false) {
         //se l'utente non è loggato ma prova lo stesso ad accedere alla pagina 
         //lo reindirizzo alla pagina forbidden

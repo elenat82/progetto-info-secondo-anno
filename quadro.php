@@ -27,7 +27,14 @@
             </ol>
             <div id="pagina-quadro">
                 <div class="half left">
-                    <img src="img/<?php echo $riga["immagine"]; ?>" alt="<?php echo $riga["titolo"]; ?>">
+                <?php 
+                    if (file_exists("img/" . $riga["immagine"])) {
+                        $path = "img/" . $riga["immagine"];
+                    } else {
+                        $path = "https://placekitten.com/1000/800";
+                    }
+                ?>
+                    <img src="<?php echo $path; ?>" alt="<?php echo $riga["titolo"]; ?>">
                     <div class="img-big">
                         <button type="button" title="Guarda immagine grande" class="text-bold"><span class="fas fa-search-plus" aria-hidden="true"></span></button>
                     </div>

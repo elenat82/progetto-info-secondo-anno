@@ -102,6 +102,8 @@ checkAccesso($_SERVER["REQUEST_URI"]);
                             //For successful SELECT, SHOW, DESCRIBE or EXPLAIN queries, mysqli_query() will return a mysqli_result object. For other successful queries mysqli_query() will return TRUE. Returns FALSE on failure.
                             if ($risultato_registrazione) {
                                 echo '<p class="text-center text-bold">Sei stato registrato con successo!</p>';
+                                //non funziona perchè non ho un server di posta
+                                mail($_POST["email-registrati"], "Registrazione sul sito Tali e Quadri", "Ciao ".$_POST["nome"].", benvenuto sul nostro sito!");
                             } else {
                                 printErrorMessage();
                             }

@@ -4,10 +4,13 @@ $activePage = basename($_SERVER['PHP_SELF'], ".php");
 ?>
 <header>
     <div id="topbar">
-        <form action="#" method="get" id="cerca" role="search">
-            <label for="keyword">Cerca</label>
-            <input type="search" name="keyword" id="keyword" maxlength="50" aria-label="Cerca per artista, titolo o parola chiave" aria-placeholder="Cerca" placeholder="Cerca..."> <button class="primary-background text-bold"><span class="fas fa-search secondary-color-light" aria-hidden="true"></span></button>
-        </form>
+        <div>
+            <form action="#" method="get" id="cerca" role="search">
+                <label for="keyword">Cerca</label>
+                <input type="search" name="keyword" id="keyword" maxlength="50" aria-label="Cerca per artista, titolo o parola chiave" aria-placeholder="Cerca" placeholder="Cerca..."> <button class="primary-background text-bold"><span class="fas fa-search secondary-color-light" aria-hidden="true"></span></button>
+            </form>
+            <p class="text-center"><a href="secondo-passo.php" title="Vai alla ricerca avanzata">Ricerca avanzata</a></p>
+        </div>
         <div id="logo" class="text-center">
             <a href="index.php" title="Home">
                 <img src="img/logo.svg" alt="Logo" width="100">
