@@ -23,6 +23,7 @@
         if ($num_righe_stili == 0) {
             $nome_stile = "nessuno";
         } else {
+            //uguale a mysqli_fetch_assoc
             while ($riga = mysqli_fetch_array($risultato_stili, MYSQLI_ASSOC)) {
                 $nome_stile = $riga["nome_stile"];
             }
@@ -54,7 +55,7 @@
                             </div>
                             <div class="descrizione">
                                 <p><span class="fas fa-long-arrow-alt-left" aria-hidden="true"></span> Guarda l'originale</p>
-                                <a href="quadro.php?sku=<?php echo $riga['sku'] ?>" title="Vai alla pagina <?php echo ucfirst($stile); ?> - <?php echo $riga["titolo"] ?>">
+                                <a href="quadro.php?sku=<?php echo $riga['sku'] ?>" title="Vai alla pagina <?php echo ucfirst($nome_stile); ?> - <?php echo $riga["titolo"] ?>">
                                     <h3 class="text-bold"><?php echo $riga["titolo"] ?></h3>
                                     <p><span>SKU: </span><span><?php echo $riga["sku"] ?></span></p>
                                     <div class="prices text-center">
@@ -84,7 +85,7 @@
                         <li class="mappa-dx">
                             <div class="descrizione">
                                 <p class="text-right">Guarda l'originale <span class="fas fa-long-arrow-alt-right" aria-hidden="true"></span></p>
-                                <a href="quadro.php?sku=<?php echo $riga['sku'] ?>" title="Vai alla pagina <?php echo $stile ?> - <?php echo $riga["titolo"] ?>">
+                                <a href="quadro.php?sku=<?php echo $riga['sku'] ?>" title="Vai alla pagina <?php echo ucfirst($nome_stile); ?> - <?php echo $riga["titolo"] ?>">
                                     <h3 class="text-bold"><?php echo $riga["titolo"] ?></h3>
                                     <p><span>SKU: </span><span><?php echo $riga["sku"] ?></span></p>
                                     <div class="prices text-center">

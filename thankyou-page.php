@@ -40,6 +40,5 @@
         </div>
     </main>
     <?php include("includes/template_footer.php") ?>
-    <?php mysqli_close($connTeQ); ?>
 </body>
 </html>

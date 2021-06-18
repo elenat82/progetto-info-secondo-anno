@@ -19,6 +19,7 @@
         include("includes/utils.php");
         $query_quadro = 'SELECT * FROM quadri q JOIN stili s ON q.id_stile = s.id_stile JOIN artisti a ON q.id_artista = a.id_artista WHERE q.sku = "' . $_GET['sku'] . '"';
         $risultato_quadri = mysqli_query($connTeQ, $query_quadro);
+        //potevo mettere anche mysqli_fetch_assoc e basta
         while ($riga = mysqli_fetch_array($risultato_quadri, MYSQLI_ASSOC)) { ?>
             <ol class="breadcrumbs">
                 <li><a href="index.php" title="Vai alla Home" class="text-bold">Home</a></li>

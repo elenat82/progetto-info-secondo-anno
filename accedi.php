@@ -103,7 +103,7 @@ checkAccesso($_SERVER["REQUEST_URI"]);
                             if ($risultato_registrazione) {
                                 echo '<p class="text-center text-bold">Sei stato registrato con successo!</p>';
                                 //non funziona perchè non ho un server di posta
-                                mail($_POST["email-registrati"], "Registrazione sul sito Tali e Quadri", "Ciao ".$_POST["nome"].", benvenuto sul nostro sito!");
+                                //mail($_POST["email-registrati"], "Registrazione sul sito Tali e Quadri", "Ciao ".$_POST["nome"].", benvenuto sul nostro sito!");
                             } else {
                                 printErrorMessage();
                             }

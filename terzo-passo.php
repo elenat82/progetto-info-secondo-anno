@@ -23,11 +23,11 @@ include("includes/utils.php");
             <li class="last">Ricerca avanzata - scegli il quadro</li>
         </ol>
         <div id="terzo-passo">
-        <h2>Scegli il quadro</h2>
+            <h2>Scegli il quadro</h2>
             <form action="quadro.php" method="get" id="terzo-passo">
                 <?php
                 //$_POST["stile"] contiene al suo interno un array di id_stile
-                if (sizeof($_POST["stile"]) == 0) {
+                if (!isset($_POST["stile"]) || sizeof($_POST["stile"]) == 0) {
                     printErrorMessage();
                 } else {
                     $query_quadri = "SELECT sku, titolo FROM quadri WHERE id_stile = " . $_POST["stile"][0];
@@ -38,19 +38,19 @@ include("includes/utils.php");
                         }
                     }
                     $query_quadri = $query_quadri . ";";
-                }
-                $risultato_quadri = mysqli_query($connTeQ, $query_quadri);
-                $num_righe_quadri = mysqli_num_rows($risultato_quadri);
-                if ($num_righe_quadri == 0) {
-                    //caso che non capiterà mai perchè già ho scelto solo stili che hanno quadri associati
-                    echo 'Nessun quadro trovato';
-                } else {
-                    foreach ($risultato_quadri as $key => $value) { ?>
-                        <fieldset>
-                            <input type="radio" name="sku" id="sku-<?php echo $value["sku"]; ?>" value="<?php echo $value["sku"]; ?>">
-                            <label for="sku-<?php echo $value["sku"]; ?>"><?php echo $value["titolo"]; ?></label>
-                        </fieldset>
-                    <?php } ?>
+                    $risultato_quadri = mysqli_query($connTeQ, $query_quadri);
+                    $num_righe_quadri = mysqli_num_rows($risultato_quadri);
+                    if ($num_righe_quadri == 0) {
+                        //caso che non capiterà mai perchè già ho scelto solo stili che hanno quadri associati
+                        echo 'Nessun quadro trovato';
+                    } else {
+                        foreach ($risultato_quadri as $key => $value) { ?>
+                            <fieldset>
+                                <input type="radio" name="sku" id="sku-<?php echo $value["sku"]; ?>" value="<?php echo $value["sku"]; ?>">
+                                <label for="sku-<?php echo $value["sku"]; ?>"><?php echo $value["titolo"]; ?></label>
+                            </fieldset>
+                    <?php }
+                    } ?>
                     <button type="submit" class="primary-background secondary-color-light text-bold">INVIA</button>
             </form>
         <?php } ?>

@@ -38,6 +38,7 @@ include("includes/utils.php");
                         <!-- https://stackoverflow.com/a/10655696 -->
                             <input type="checkbox" name="stile[]" id="stile-<?php echo $value["id_stile"]; ?>" value="<?php echo $value["id_stile"]; ?>">
                             <label for="stile-<?php echo $value["id_stile"]; ?>"><?php echo $value["nome_stile"]; ?></label>
+                            <!-- aggiungere required, non l'ho fatto per fare lo use case dell'errore -->
                         </fieldset>
                 <?php }
                 }

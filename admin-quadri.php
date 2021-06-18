@@ -47,7 +47,7 @@ function printEmptyForm($artisti, $stili)
     $string .= '<textarea id="mappa" name="mappa" placeholder="Inserisci l\'url della mappa" required maxlength="500"></textarea>';
     $string .= '</td>';
     $string .= '<td>';
-    $string .= '<select id="id_artista" name="id_artista">';
+    $string .= '<select id="id_artista" name="id_artista" required>';
     $string .= '<option value="">Scegli un artista</option>';
     foreach ($artisti as $key => $art) {
         $string .= '<option value="' . $art["id_artista"] . '" required>' . $art["nome_artista"] . ' ' . $art["cognome_artista"] . '</option>';
@@ -55,7 +55,7 @@ function printEmptyForm($artisti, $stili)
     $string .= '</select>';
     $string .= '</td>';
     $string .= '<td>';
-    $string .= '<select id="id_stile" name="id_stile">';
+    $string .= '<select id="id_stile" name="id_stile" required>';
     $string .= '<option value="">Scegli uno stile</option>';
     foreach ($stili as $key => $stile) {
         $string .= '<option value="' . $stile["id_stile"] . '" required>' . $stile["nome_stile"] . '</option>';
@@ -114,8 +114,8 @@ function printEmptyForm($artisti, $stili)
                             if ($risultato_modifica) {
                                 //per evitare che dentro $_POST restino i dati dopo aver inviato il post
                                 //https://en.wikipedia.org/wiki/Post/Redirect/Get
-                                /* header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
-                                exit(); */
+                                header("Location: {$_SERVER['REQUEST_URI']}", true, 303);
+                                exit();
                             } else {
                                 printErrorMessage();
                             }
@@ -154,7 +154,7 @@ function printEmptyForm($artisti, $stili)
                                 <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST" id="quadro-<?php echo  $key ?>">
                                     <td>
                                         <input type="hidden" id="azione" name="azione" value="modifica">
-                                        <input type="text" id="sku-<?php echo $key ?>" name="sku" placeholder="Inserisci l'sku del quadro" required maxlength="255" value="<?php echo $value["sku"] ?>">
+                                        <input type="text" id="sku-<?php echo $key ?>" name="sku" placeholder="Inserisci l'sku del quadro" required maxlength="255" value="<?php echo $value["sku"] ?>" readonly>
                                     </td>
                                     <td>
                                         <input type="text" id="titolo-<?php echo $key ?>" name="titolo" placeholder="Inserisci il titolo del quadro" required maxlength="255" value="<?php echo $value["titolo"] ?>">
@@ -184,7 +184,7 @@ function printEmptyForm($artisti, $stili)
                                     <textarea id="mappa-<?php echo $key ?>" name="mappa" placeholder="Inserisci l'url della mappa" required maxlength="500"><?php echo $value["mappa"] ?></textarea>
                                 </td>
                                 <td>
-                                    <select id="id_artista" name="id_artista">
+                                    <select id="id_artista" name="id_artista" required>
                                         <?php
                                         foreach ($risultato_artisti as $key => $art) {
                                             echo '<option value="' . $art["id_artista"] . '" required ';
@@ -194,7 +194,7 @@ function printEmptyForm($artisti, $stili)
                                     </select>
                                 </td>
                                 <td>
-                                    <select id="id_stile" name="id_stile">
+                                    <select id="id_stile" name="id_stile" required>
                                         <?php
                                         foreach ($risultato_stili as $key => $stile) {
                                             echo '<option value="' . $stile["id_stile"] . '" required ';
